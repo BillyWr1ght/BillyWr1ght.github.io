@@ -6,125 +6,142 @@
   <title>Billy Wright</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+  <div class="bg-grid"></div>
   <div class="bg-orb orb-1"></div>
   <div class="bg-orb orb-2"></div>
-  <div class="bg-grid"></div>
+  <div class="spotlight"></div>
 
   <header class="hero">
     <nav class="navbar">
       <div class="brand">Billy Wright</div>
       <div class="nav-links">
         <a href="#about">About</a>
-        <a href="#projects">projects</a>
+        <a href="#projects">Projects</a>
         <a href="#contact">Contact</a>
       </div>
     </nav>
 
     <section class="hero-content">
-      <p class="eyebrow">Personal Brand • Digital Presence • Creative Vision</p>
-      <h1>Bold, clean, modern.</h1>
+      <p class="eyebrow">Creative Projects • Game Ideas • Digital Experiments</p>
+      <h1>Building cool things on the internet.</h1>
       <p class="hero-text">
-        Welcome to my website. This is where I share who I am, what I do, and
-        how to connect with me.
+        Hi, I’m Billy Wright. I make fun projects, experiment with ideas,
+        and build things I actually care about.
+      </p>
+
+      <p class="typing-line">
+        Currently making:
+        <span id="typed-text"></span>
       </p>
 
       <div class="hero-buttons">
-        <a href="#projects" class="btn btn-primary">View My Work</a>
+        <a href="#projects" class="btn btn-primary">See My Projects</a>
         <a href="#contact" class="btn btn-secondary">Contact Me</a>
-      </div>
-
-      <div class="stats">
-        <div class="stat-card">
-          <span class="stat-number">01</span>
-          <span class="stat-label">Personal Brand</span>
-        </div>
-        <div class="stat-card">
-          <span class="stat-number">02</span>
-          <span class="stat-label">Creative Projects</span>
-        </div>
-        <div class="stat-card">
-          <span class="stat-number">03</span>
-          <span class="stat-label">Future Growth</span>
-        </div>
       </div>
     </section>
   </header>
 
   <main class="main-content">
-    <section id="about" class="section glass-card fade-up">
+    <section id="about" class="section glass-card reveal">
       <p class="section-tag">About</p>
-      <h2>Who I Am</h2>
+      <h2>A little about me</h2>
       <p>
-        I’m Billy Wright. Im currently focusing on building a digital presence, by creating individual projects. 
+        I’m Billy Wright, and this site is my space on the internet.
+        I use it to share the projects I’m making, ideas I’m testing,
+        and stuff I think is fun to build.
       </p>
     </section>
 
-    <section id="projects" class="section fade-up">
-      <p class="section-tag">What I Do</p>
-      <h2>What I’m Building</h2>
+    <section id="projects" class="section reveal">
+      <p class="section-tag">Projects</p>
+      <h2>Things I’m working on</h2>
 
-      <div class="card-grid">
-        <article class="info-card">
-          <h3>Brand Identity</h3>
+      <div class="project-grid">
+        <article class="project-card featured-card tilt-card">
+          <div class="project-top">
+            <span class="project-badge">Featured</span>
+          </div>
+          <h3>Guinea Pig Game</h3>
           <p>
-            Building a look and presence that feels modern, memorable, and
-            consistent.
+            A fun project built around guinea pigs, gameplay ideas, and creative design.
+            This is one of the main things I’m developing right now.
           </p>
+          <div class="project-tags">
+            <span>Game</span>
+            <span>Creative</span>
+            <span>In Progress</span>
+          </div>
+          <button class="project-button" onclick="showProjectMessage('Guinea Pig Game')">
+            Open Project
+          </button>
         </article>
 
-        <article class="info-card">
-          <h3>Creative Direction</h3>
+        <article class="project-card tilt-card">
+          <div class="project-top">
+            <span class="project-badge alt">Idea</span>
+          </div>
+          <h3>Future Project</h3>
           <p>
-            Turning ideas into visuals, projects, and experiences that stand out.
+            Add another project here when you’re ready. This could be a game,
+            website, tool, or any idea you want to show off.
           </p>
+          <div class="project-tags">
+            <span>Idea</span>
+            <span>Prototype</span>
+          </div>
+          <button class="project-button" onclick="showProjectMessage('Future Project')">
+            Learn More
+          </button>
         </article>
 
-        <article class="info-card">
-          <h3>Online Presence</h3>
+        <article class="project-card tilt-card">
+          <div class="project-top">
+            <span class="project-badge alt">Next</span>
+          </div>
+          <h3>More Coming Soon</h3>
           <p>
-            Creating a clean website and digital home base that represents me well.
+            This section can grow with you. Add new projects, screenshots,
+            videos, links, and updates over time.
           </p>
+          <div class="project-tags">
+            <span>Coming Soon</span>
+            <span>Updates</span>
+          </div>
+          <button class="project-button" onclick="showProjectMessage('More Coming Soon')">
+            Explore
+          </button>
         </article>
       </div>
     </section>
 
-    <section class="section feature-panel fade-up">
-      <div class="feature-text">
-        <p class="section-tag">Vision</p>
-        <h2>Professional look. Strong energy.</h2>
-        <p>
-          This site is designed to feel sleek, interactive, and premium. You can
-          keep customizing the text, colors, sections, and links as your brand grows.
-        </p>
-      </div>
-
-      <div class="feature-box">
-        <div class="mini-card">
-          <span>Clean Layout</span>
-        </div>
-        <div class="mini-card">
-          <span>Smooth Effects</span>
-        </div>
-        <div class="mini-card">
-          <span>Modern Style</span>
-        </div>
-      </div>
+    <section class="section glass-card reveal">
+      <p class="section-tag">Why this site exists</p>
+      <h2>A place to show what I make</h2>
+      <p>
+        I don’t need a big company or brand to have a cool site.
+        This is where I can post the things I’m building and make the page feel more like me.
+      </p>
     </section>
 
-    <section id="contact" class="section glass-card fade-up">
+    <section id="contact" class="section glass-card reveal">
       <p class="section-tag">Contact</p>
-      <h2>Let’s Connect</h2>
-      <p>Email: Billywrightn@gmail.com</p>
-      <p>Instagram: @CoolBilly10</p>
+      <h2>Get in touch</h2>
+      <p>Email: yourname@example.com</p>
+      <p>Discord: yourname</p>
+      <p>GitHub: BillyWr1ght</p>
     </section>
   </main>
+
+  <div class="toast" id="toast"></div>
 
   <footer class="footer">
     <p>© 2026 Billy Wright. All rights reserved.</p>
   </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
