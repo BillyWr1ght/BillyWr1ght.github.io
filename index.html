@@ -13,166 +13,160 @@
   <div class="bg-grid"></div>
   <div class="bg-orb orb-1"></div>
   <div class="bg-orb orb-2"></div>
-  <div class="spotlight"></div>
 
   <header class="hero">
     <nav class="navbar">
       <div class="brand">Billy Wright</div>
-      <div class="nav-links"> 
-        <a href="#shop">Shop</a>
+      <div class="nav-links">
         <a href="#about">About</a>
         <a href="#projects">Projects</a>
+        <a href="#shop">Shop</a>
         <a href="#contact">Contact</a>
       </div>
     </nav>
 
-    <section class="hero-content">
-      <p class="eyebrow">Creative Projects • Game Ideas • Digital Experiments</p>
+    <div class="hero-inner">
+      <p class="eyebrow">Projects • Ideas • Cool Stuff I’m Building</p>
       <h1>Building cool things on the internet.</h1>
       <p class="hero-text">
-        Hi, I’m Billy Wright. I make fun projects, experiment with ideas,
-        and build things I actually care about.
-      </p>
-
-      <p class="typing-line">
-        Currently making:
-        <span id="typed-text"></span>
+        Hi, I’m Billy Wright. This is my space to share projects I’m making,
+        ideas I’m exploring, and things I actually care about creating.
       </p>
 
       <div class="hero-buttons">
         <a href="#projects" class="btn btn-primary">See My Projects</a>
-        <a href="#contact" class="btn btn-secondary">Contact Me</a>
+        <a href="#shop" class="btn btn-secondary">Visit My Shop</a>
       </div>
-    </section>
+
+      <div class="hero-cards">
+        <div class="mini-panel">
+          <span class="mini-label">Featured Project</span>
+          <strong>Guinea Pig Game</strong>
+        </div>
+        <div class="mini-panel">
+          <span class="mini-label">Store</span>
+          <strong>GearLoom</strong>
+        </div>
+        <div class="mini-panel">
+          <span class="mini-label">Focus</span>
+          <strong>Creative builds</strong>
+        </div>
+      </div>
+    </div>
   </header>
 
   <main class="main-content">
-    <section id="about" class="section glass-card reveal">
+    <section id="about" class="section glass-card">
       <p class="section-tag">About</p>
       <h2>A little about me</h2>
       <p>
-        I’m Billy Wright, and this site is my space on the internet.
-        I use it to share the projects I’m making, ideas I’m testing,
-        and stuff I think is fun to build.
+        I’m Billy Wright, and this site is where I show what I’m working on.
+        I like making fun projects, testing ideas, and building things that feel creative,
+        interesting, and personal.
       </p>
     </section>
 
-    <section id="projects" class="section reveal">
+    <section id="projects" class="section">
       <p class="section-tag">Projects</p>
       <h2>Things I’m working on</h2>
 
-      <div class="project-grid">
-        <article class="project-card featured-card tilt-card">
-          <div class="project-top">
-            <span class="project-badge">Featured</span>
-          </div>
+      <div class="card-grid">
+        <article class="feature-card featured">
+          <span class="card-badge">Featured</span>
           <h3>Guinea Pig Game</h3>
           <p>
             A fun project built around guinea pigs, gameplay ideas, and creative design.
-            This is one of the main things I’m developing right now.
+            This is one of the main things I’m focused on right now.
           </p>
-          <div class="project-tags">
+          <div class="tag-row">
             <span>Game</span>
             <span>Creative</span>
             <span>In Progress</span>
           </div>
-          <button class="project-button" onclick="showProjectMessage('Guinea Pig Game')">
-            Open Project
-          </button>
         </article>
 
-        <article class="project-card tilt-card">
-          <div class="project-top">
-            <span class="project-badge alt">Idea</span>
-          </div>
+        <article class="feature-card">
+          <span class="card-badge alt">Idea</span>
           <h3>Future Project</h3>
           <p>
-            Add another project here when you’re ready. This could be a game,
-            website, tool, or any idea you want to show off.
+            This space is for the next thing I make. It could be another game,
+            a website, a tool, or something completely different.
           </p>
-          <div class="project-tags">
-            <span>Idea</span>
+          <div class="tag-row">
             <span>Prototype</span>
+            <span>Idea</span>
           </div>
-          <button class="project-button" onclick="showProjectMessage('Future Project')">
-            Learn More
-          </button>
         </article>
 
-        <article class="project-card tilt-card">
-          <div class="project-top">
-            <span class="project-badge alt">Next</span>
-          </div>
+        <article class="feature-card">
+          <span class="card-badge alt">Next</span>
           <h3>More Coming Soon</h3>
           <p>
-            This section can grow with you. Add new projects, screenshots,
-            videos, links, and updates over time.
+            I’ll keep adding new projects here over time so this site grows with me.
           </p>
-          <div class="project-tags">
-            <span>Coming Soon</span>
+          <div class="tag-row">
             <span>Updates</span>
+            <span>More Soon</span>
           </div>
-          <button class="project-button" onclick="showProjectMessage('More Coming Soon')">
-            Explore
-          </button>
         </article>
       </div>
     </section>
 
-    <section class="section glass-card reveal">
+    <section id="shop" class="section glass-card shop-section">
+      <div class="shop-copy">
+        <p class="section-tag">Shop</p>
+        <h2>GearLoom</h2>
+        <p>
+          Visit my Etsy shop, GearLoom, to check out what I’m selling.
+          New items and designs can be added over time as the shop grows.
+        </p>
+
+        <a
+          href="https://www.etsy.com/shop/GearLoom"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn btn-primary"
+        >
+          Visit GearLoom
+        </a>
+      </div>
+
+      <div class="shop-card">
+        <span class="shop-pill">Etsy Store</span>
+        <h3>GearLoom on Etsy</h3>
+        <p>
+          A clean direct link to my shop for anyone who wants to browse what I’m making.
+        </p>
+        <div class="tag-row">
+          <span>Etsy</span>
+          <span>Shop</span>
+          <span>GearLoom</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section glass-card">
       <p class="section-tag">Why this site exists</p>
       <h2>A place to show what I make</h2>
       <p>
-        I don’t need a big company or brand to have a cool site.
-        This is where I can post the things I’m building and make the page feel more like me.
+        I do not need a company or a huge brand to have a cool website.
+        This is my place to post projects, share updates, and connect my ideas in one spot.
       </p>
     </section>
-<section id="shop" class="section reveal">
-  <p class="section-tag">Shop</p>
-  <h2>My Etsy Store</h2>
 
-  <div class="project-grid">
-    <article class="project-card featured-card tilt-card">
-      <div class="project-top">
-        <span class="project-badge">Shop</span>
-      </div>
-
-      <h3>Visit My Etsy</h3>
-      <p>
-        Check out my Etsy shop where I sell my creations.
-        More items and designs coming soon.
-      </p>
-
-      <div class="project-tags">
-        <span>Etsy</span>
-        <span>Products</span>
-        <span>Store</span>
-      </div>
-
-      <a 
-        href="https://www.etsy.com/shop/GearLoom" 
-        target="_blank" 
-        class="project-button"
-      >
-        Open Shop
-      </a>
-    </article>
-  </div>
-</section>
-    <section id="contact" class="section glass-card reveal">
+    <section id="contact" class="section glass-card">
       <p class="section-tag">Contact</p>
       <h2>Get in touch</h2>
-      <p>Email: billywrightn@gmail.com</p>
-      <p>Instagram: Coolbilly10</p>
-      <p>GitHub: BillyWr1ght</p>
+      <div class="contact-list">
+        <p><strong>Email:</strong> billywrightn@gmail.com</p>
+        <p><strong>Instagram:</strong> Coolbilly10</p>
+        <p><strong>GitHub:</strong> BillyWr1ght</p>
+      </div>
     </section>
   </main>
-
-  <div class="toast" id="toast"></div>
 
   <footer class="footer">
     <p>© 2026 Billy Wright. All rights reserved.</p>
   </footer>
-<!-- <script src="script.js"></script> -->
 </body>
 </html>
