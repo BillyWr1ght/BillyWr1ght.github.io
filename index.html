@@ -1192,8 +1192,8 @@
   }
   .robotics-hero-layout {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(280px, 390px);
-    gap: 84px;
+    grid-template-columns: minmax(0, .82fr) minmax(420px, 570px);
+    gap: 56px;
     align-items: center;
     padding-bottom: 78px;
   }
@@ -1218,6 +1218,34 @@
     max-width: 540px;
     line-height: 1.75;
     font-size: 1rem;
+  }
+  .robotics-hero-photo {
+    position: relative;
+    margin: 0;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    background: #fff;
+    box-shadow: 0 18px 45px rgba(26,43,74,.1);
+  }
+  .robotics-hero-photo img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .robotics-hero-photo figcaption {
+    position: absolute;
+    right: 12px;
+    bottom: 12px;
+    padding: 7px 10px;
+    border-radius: 999px;
+    background: rgba(15,29,52,.86);
+    color: #fff;
+    font-family: var(--mono);
+    font-size: .58rem;
+    font-weight: 600;
+    letter-spacing: .08em;
+    text-transform: uppercase;
   }
   .robotics-club-logo {
     min-height: auto;
@@ -1258,6 +1286,19 @@
     width: 100%;
     height: auto;
     background: #fff;
+  }
+  .robotics-team-gallery .robotics-club-logo {
+    height: auto;
+    aspect-ratio: 4 / 3;
+  }
+  .robotics-team-gallery .robotics-logo-inner,
+  .robotics-team-gallery .robotics-logo-face {
+    height: 100%;
+  }
+  .robotics-team-gallery .robotics-logo-front img {
+    flex: 1;
+    min-height: 0;
+    object-fit: contain;
   }
   .robotics-club-logo-caption {
     margin-top: 16px;
@@ -1376,10 +1417,10 @@
   .rob-card-desc { font-size: .85rem; color: var(--gray); line-height: 1.6; }
   .robotics-team-gallery {
     display: grid;
-    grid-template-columns: minmax(0, 1.25fr) minmax(180px, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     grid-column: 1 / -1;
     gap: 22px;
-    align-items: start;
+    align-items: stretch;
     margin-top: 22px;
   }
   .robotics-team-copy {
@@ -1394,12 +1435,14 @@
     border-radius: 20px;
     background: #fff;
     box-shadow: 0 18px 42px rgba(26,43,74,.13);
+    height: auto;
+    aspect-ratio: 4 / 3;
   }
   .robotics-team-photo img {
     width: 100%;
-    height: auto;
+    height: 100%;
     display: block;
-    object-fit: contain;
+    object-fit: cover;
   }
   .robotics-team-photo figcaption {
     position: absolute;
@@ -2031,8 +2074,13 @@
   .clean-video-card iframe { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; background: #0d1b31; border: 0; }
   .video-thumb-wrapper { position: relative; width: 100%; aspect-ratio: 16 / 9; overflow: hidden; background: #0d1b31; }
   .video-thumb-wrapper img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .video-thumb-wrapper button { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; background: rgba(0,0,0,.32); color: white; font-family: var(--display); font-size: 1rem; font-weight: 700; letter-spacing: .08em; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background .2s; }
-  .video-thumb-wrapper button:hover { background: rgba(0,0,0,.44); }
+  .video-thumb-wrapper button { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; background: rgba(0,0,0,.38); color: white; cursor: pointer; display: flex; flex-direction: column; gap: 12px; align-items: center; justify-content: center; transition: background .2s; }
+  .video-thumb-wrapper button:hover { background: rgba(0,0,0,.52); }
+  .video-play-icon { width: 68px; height: 68px; display: grid; place-items: center; border: 2px solid rgba(255,255,255,.9); border-radius: 50%; background: var(--blue); box-shadow: 0 10px 28px rgba(0,0,0,.32); transition: transform .2s, background .2s; }
+  .video-play-icon svg { width: 30px; height: 30px; margin-left: 4px; fill: currentColor; }
+  .video-thumb-wrapper button:hover .video-play-icon { transform: scale(1.08); background: #1d4ed8; }
+  .video-play-label { font-family: var(--display); font-size: 1.05rem; font-weight: 700; letter-spacing: .04em; }
+  .video-play-hint { padding: 5px 9px; border-radius: 999px; background: rgba(15,29,52,.78); font-family: var(--mono); font-size: .62rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; }
   .video-thumb-wrapper iframe { width: 100%; height: 100%; display: block; border: 0; }
   .clean-video-copy { padding: 20px 24px 23px; }
   .clean-video-copy h3 { color: var(--navy); font-family: var(--display); font-size: 1.05rem; margin-bottom: 6px; }
@@ -2450,14 +2498,10 @@
           <h1 class="robotics-title">Robotics Club</h1>
           <p class="robotics-intro">Hands-on experience with mechanical design, programming, electronics, and team competitions.</p>
         </div>
-        <div class="robotics-club-logo">
-          <div class="robotics-logo-inner">
-            <div class="robotics-logo-face robotics-logo-front">
-              <img src="images/Robotica%20Mexico.png" alt="Robótica México club logo">
-              <div class="robotics-club-logo-caption">Proud member of Robótica México</div>
-            </div>
-          </div>
-        </div>
+        <figure class="robotics-hero-photo">
+          <img src="images/FullGroup.png" alt="Robótica México team members together in their club uniforms">
+          <figcaption>The full team</figcaption>
+        </figure>
       </div>
     </div>
     <div class="robotics-stats-wrap">
@@ -2482,26 +2526,6 @@
     </div>
   </div>
 
-  <section class="robotics-featured-video" aria-labelledby="clubVideoTitle">
-    <div class="container robotics-featured-video-inner">
-      <div class="project-video-heading">
-        <span class="section-label">Club Video</span>
-        <h2 id="clubVideoTitle">First Prototype</h2>
-        <p>An early look at the first working prototype and its initial testing process.</p>
-      </div>
-      <div class="clean-video-card">
-        <div class="video-thumb-wrapper">
-          <img src="images/thumbnail.png" alt="First Prototype thumbnail">
-          <button type="button" data-src="https://drive.google.com/file/d/19sDOL2qlcwASDrpnZgtKZuCL5GkzRSSK/preview" onclick="loadDrivePreview(this)">Play Prototype</button>
-        </div>
-        <div class="clean-video-copy">
-          <h3>First Prototype</h3>
-          <p>The first build documents the starting point for later mechanical and programming improvements.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <section class="section-sm" style="background:var(--gray-light);border-top:1px solid var(--border);">
     <div class="container">
       <div class="proj-col-2">
@@ -2513,14 +2537,42 @@
           <p style="color:var(--gray);line-height:1.75;">On the team, I focus primarily on mechanical design and CAD — creating parts, assemblies, and drawings that the rest of the team can use to build and modify. I also support the programming team by documenting the mechanical constraints that affect their software design.</p>
         </div>
         <div class="robotics-team-gallery" aria-label="Robótica México team photos">
-          <figure class="robotics-team-photo">
-            <img src="images/FullGroup.png" alt="Robótica México team members together in their club uniforms">
-            <figcaption>The full team</figcaption>
-          </figure>
+          <div class="robotics-club-logo">
+            <div class="robotics-logo-inner">
+              <div class="robotics-logo-face robotics-logo-front">
+                <img src="images/Robotica%20Mexico.png" alt="Robótica México club logo">
+                <div class="robotics-club-logo-caption">Proud member of Robótica México</div>
+              </div>
+            </div>
+          </div>
           <figure class="robotics-team-photo">
             <img src="images/3PPLPic.png" alt="Three Robótica México teammates posing together">
             <figcaption>Teammates</figcaption>
           </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="robotics-featured-video" aria-labelledby="clubVideoTitle">
+    <div class="container robotics-featured-video-inner">
+      <div class="project-video-heading">
+        <span class="section-label">Club Video</span>
+        <h2 id="clubVideoTitle">First Prototype</h2>
+        <p>An early look at the first working prototype and its initial testing process.</p>
+      </div>
+      <div class="clean-video-card">
+        <div class="video-thumb-wrapper">
+          <img src="images/thumbnail.png" alt="First Prototype thumbnail">
+          <button type="button" data-src="https://drive.google.com/file/d/19sDOL2qlcwASDrpnZgtKZuCL5GkzRSSK/preview" onclick="loadDrivePreview(this)" aria-label="Play the First Prototype video">
+            <span class="video-play-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+            <span class="video-play-label">Play Prototype Video</span>
+            <span class="video-play-hint">Click to watch</span>
+          </button>
+        </div>
+        <div class="clean-video-copy">
+          <h3>First Prototype</h3>
+          <p>The first build documents the starting point for later mechanical and programming improvements.</p>
         </div>
       </div>
     </div>
