@@ -111,32 +111,22 @@
     letter-spacing: -.01em;
   }
   .nav-logo .logo-mark {
-    width: 44px; height: 40px;
-    background: linear-gradient(145deg, var(--navy), #223d67);
-    border: 1px solid rgba(37,99,235,.45);
-    border-radius: 10px;
+    width: 42px; height: 42px;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 8px;
     display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
     flex-shrink: 0;
-    box-shadow: 0 5px 14px rgba(26,43,74,.18);
+    box-shadow: 0 4px 12px rgba(26,43,74,.14);
   }
-  .nav-logo .logo-letters {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 1.12rem;
-    font-weight: 900;
-    line-height: 1;
-  }
-  .nav-logo .logo-letters span:first-child {
-    transform: translate(2px, 3px);
-  }
-  .nav-logo .logo-letters span:last-child {
-    color: #93b4ff;
-    margin-left: -3px;
-    transform: translate(-1px, -3px);
-  }
+  .nav-logo .logo-mark img { width: 100%; height: 100%; object-fit: contain; display: block; }
+  .nav-logo .logo-name { font-weight: 400; font-size: 1.02rem; letter-spacing: .035em; }
+  .nav-logo { transition: color .22s ease, transform .22s ease; }
+  .nav-logo .logo-mark { transition: transform .25s ease, box-shadow .25s ease; }
+  .nav-logo:hover { color: var(--blue); transform: translateY(-1px); }
+  .nav-logo:hover .logo-mark { transform: rotate(-2deg) scale(1.04); box-shadow: 0 7px 18px rgba(26,43,74,.18); }
+  .nav-logo:focus-visible { outline: 3px solid rgba(37,99,235,.25); outline-offset: 4px; border-radius: 8px; }
   .nav-links {
     display: flex;
     align-items: center;
@@ -165,7 +155,7 @@
     transition: transform .2s;
   }
   .nav-links a:hover { color: var(--blue); background: var(--blue-pale); }
-  .nav-links a:hover::after { transform: scaleX(1); }
+  .nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); }
   .nav-links a.active { color: var(--navy); font-weight: 600; }
   .nav-cta {
     background: var(--blue);
@@ -189,10 +179,17 @@
     background: var(--navy); border-radius: 2px;
     transition: all .3s;
   }
+  .hamburger[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger[aria-expanded="true"] span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  .hamburger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
   /* ── Pages (SPA) ──────────────────────────── */
   .page { display: none; min-height: 100vh; padding-top: 64px; }
-  .page.active { display: block; }
+  .page.active { display: block; animation: pageEnter .42s cubic-bezier(.22,.7,.2,1) both; }
+  @keyframes pageEnter {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
 
   /* ── Section helpers ──────────────────────── */
   .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
@@ -1049,6 +1046,7 @@
   }
   .about-photo-image .portrait-fallback { border-radius: 18px; }
   .about-intro-text { padding-bottom: 0; }
+  .about-name { margin-top: 12px; color: var(--navy); font-family: var(--display); font-size: clamp(2.35rem,4.5vw,3.8rem); font-weight: 400; line-height: 1.08; letter-spacing: .035em; }
   .about-quote {
     font-family: var(--display);
     font-size: 1.3rem;
@@ -1921,26 +1919,20 @@
   }
   .project-thumb-link img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .4s ease; }
   .project-showcase-card:hover .project-thumb-link img { transform: scale(1.025); }
-  .project-thumb-overlay {
-    position: absolute;
-    right: 16px;
-    bottom: 16px;
-    padding: 8px 11px;
-    border-radius: 7px;
-    background: rgba(26,43,74,.9);
-    color: white;
-    font-family: var(--mono);
-    font-size: .62rem;
-    letter-spacing: .06em;
-    text-transform: uppercase;
-    transition: transform .22s ease;
-  }
-  .project-showcase-card:hover .project-thumb-overlay { transform: translateX(3px); }
   .project-showcase-content { padding: 22px 24px 24px; }
   .project-title-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 8px; }
   .project-showcase-content h2 { font-family: var(--display); color: var(--navy); font-size: 1.35rem; letter-spacing: -.02em; margin: 0; }
   .project-showcase-content p { color: var(--gray); line-height: 1.55; font-size: .86rem; max-width: 620px; }
   .project-showcase-content .project-card-tags { margin-top: 14px; }
+  .project-view-button { display: inline-flex; align-items: center; justify-content: center; gap: 10px; margin-top: 22px; padding: 12px 18px; border: 2px solid var(--blue); border-radius: 9px; background: var(--blue); color: white; font-family: var(--display); font-size: .88rem; font-weight: 700; text-decoration: none; box-shadow: 0 7px 18px rgba(37,99,235,.22); transition: transform .2s ease, background .2s ease, box-shadow .2s ease; }
+  .project-view-button svg { width: 18px; height: 18px; transition: transform .2s ease; }
+  .project-view-button:hover { transform: translateY(-2px); background: #1d4ed8; box-shadow: 0 10px 24px rgba(37,99,235,.3); }
+  .project-view-button:hover svg { transform: translateX(3px); }
+  .project-view-button:focus-visible { outline: 3px solid rgba(37,99,235,.3); outline-offset: 3px; }
+  .project-view-overlay { position: absolute; right: 18px; bottom: 18px; margin-top: 0; pointer-events: none; }
+  .project-thumb-link:hover .project-view-overlay { transform: translateY(-2px); background: #1d4ed8; box-shadow: 0 10px 24px rgba(37,99,235,.3); }
+  .project-thumb-link:hover .project-view-overlay svg { transform: translateX(3px); }
+  .project-thumb-link:focus-visible { outline: 3px solid var(--blue); outline-offset: -3px; }
 
   .asset-slot { position: relative; overflow: hidden; background: var(--blue-pale); border: 1.5px solid var(--border); border-radius: var(--radius); }
   .asset-slot.wide { aspect-ratio: 16/9; }
@@ -2001,9 +1993,6 @@
   }
 
   /* Simplified robotic arm project */
-  #page-project-robotic-arm > .proj-hero,
-  #page-project-robotic-arm > .section-sm,
-  #page-project-robotic-arm > .proj-section { display: none; }
   .arm-simple { background: #f7f9fc; min-height: 100vh; padding: 58px 0 90px; }
   .arm-simple-header { max-width: 760px; margin-bottom: 42px; }
   .arm-simple-back { display: inline-flex; color: var(--blue); font-family: var(--mono); font-size: .72rem; font-weight: 700; letter-spacing: .06em; text-decoration: none; margin-bottom: 30px; }
@@ -2051,6 +2040,53 @@
   .video-file-note { display: inline-block; margin-top: 10px; color: var(--blue); font-family: var(--mono); font-size: .65rem; letter-spacing: .04em; }
   .club-video-section { padding: 76px 0 0; background: transparent; border: 0; }
   .club-video-layout { max-width: 1080px; }
+  .robotics-featured-video { padding: 68px 0; background: #fff; border-bottom: 1px solid var(--border); }
+  .robotics-featured-video-inner { display: grid; grid-template-columns: minmax(240px,.65fr) minmax(0,1.35fr); gap: clamp(42px,6vw,78px); align-items: center; }
+  .robotics-featured-video .project-video-heading { margin: 0; }
+  .robotics-featured-video .clean-video-card { width: 100%; max-width: 760px; margin: 0; }
+
+  /* Calm robotic arm case study */
+  .arm-calm { background: #fff; color: var(--navy); }
+  .arm-calm-hero { padding: 58px 0 76px; border-bottom: 1px solid var(--border); }
+  .arm-calm-hero-inner { max-width: 1200px; }
+  .arm-calm-hero .arm-simple-back { margin-bottom: 36px; }
+  .arm-calm-hero-grid { display: grid; grid-template-columns: minmax(0,.9fr) minmax(420px,1.1fr); gap: clamp(44px, 6vw, 78px); align-items: center; }
+  .arm-calm-hero-copy { min-width: 0; }
+  .arm-calm-status { display: flex; align-items: center; gap: 9px; color: #7c5b17; font-family: var(--mono); font-size: .68rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+  .arm-calm-status span { width: 8px; height: 8px; border-radius: 50%; background: var(--amber); box-shadow: 0 0 0 5px rgba(245,158,11,.12); }
+  .arm-calm-hero h1 { max-width: 780px; margin: 16px 0 20px; font-family: var(--display); font-size: clamp(2.6rem, 5vw, 4rem); line-height: 1.03; letter-spacing: -.04em; }
+  .arm-calm-hero p { max-width: 680px; color: var(--gray); font-size: clamp(1rem, 2vw, 1.16rem); line-height: 1.75; }
+  .arm-calm-meta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 32px; }
+  .arm-calm-meta span { padding: 7px 12px; border: 1px solid #dbe4f0; border-radius: 999px; background: rgba(255,255,255,.75); color: #475569; font-family: var(--mono); font-size: .66rem; letter-spacing: .04em; }
+  .arm-calm-section { padding: 76px 0; border-bottom: 1px solid var(--border); }
+  .arm-calm-overview { display: grid; grid-template-columns: minmax(0,.85fr) minmax(0,1.15fr); gap: clamp(48px, 9vw, 110px); align-items: start; }
+  .arm-calm-overview h2, .arm-calm-section-heading h2 { margin-top: 12px; font-family: var(--display); font-size: clamp(2rem, 4vw, 3rem); line-height: 1.12; letter-spacing: -.04em; }
+  .arm-calm-copy { max-width: 620px; }
+  .arm-calm-copy p { color: var(--gray); font-size: 1rem; line-height: 1.85; }
+  .arm-calm-copy p + p { margin-top: 20px; }
+  .arm-calm-gallery-section { background: #f7f9fc; }
+  .arm-calm-section-heading { display: flex; justify-content: space-between; gap: 40px; align-items: end; margin-bottom: 36px; }
+  .arm-calm-section-heading > p { max-width: 310px; color: var(--gray); font-size: .86rem; line-height: 1.6; }
+  .arm-calm-carousel { width: min(100%, 820px); margin-inline: auto; }
+  .arm-calm-carousel .arm-carousel-viewport { box-shadow: 0 16px 44px rgba(26,43,74,.09); }
+  .arm-calm-carousel .arm-carousel-media { aspect-ratio: 16 / 8.5; }
+  .arm-calm-carousel .arm-carousel-media img { object-fit: cover; }
+  .arm-calm-carousel .arm-carousel-caption { display: grid; grid-template-columns: 44px 150px 1fr; gap: 18px; align-items: baseline; min-height: 0; padding: 25px 30px 28px; }
+  .arm-calm-carousel .arm-carousel-caption span { color: var(--blue); font-family: var(--mono); font-size: .68rem; font-weight: 700; }
+  .arm-calm-carousel .arm-carousel-caption h3 { font-family: var(--display); font-size: 1.15rem; }
+  .arm-calm-carousel .arm-carousel-caption p { max-width: 570px; }
+  .arm-video-placeholder { width: min(100%, 820px); aspect-ratio: 16 / 9; margin-inline: auto; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; border: 1px solid #1e3355; border-radius: var(--radius-lg); background: var(--navy); color: white; box-shadow: var(--shadow-md); text-align: center; }
+  .arm-video-hero { width: 100%; margin: 0; box-shadow: 0 18px 42px rgba(26,43,74,.16); }
+  .arm-video-play { width: 58px; height: 58px; display: grid; place-items: center; margin-bottom: 8px; border: 1px solid rgba(255,255,255,.24); border-radius: 50%; background: rgba(255,255,255,.1); color: white; }
+  .arm-video-play svg { width: 28px; height: 28px; }
+  .arm-video-placeholder strong { font-family: var(--display); font-size: 1.05rem; }
+  .arm-video-placeholder > span { color: rgba(255,255,255,.62); font-size: .82rem; }
+  @media (max-width: 900px) {
+    .arm-calm-hero-grid { grid-template-columns: 1fr; gap: 38px; }
+    .arm-video-hero { width: min(100%, 680px); }
+    .robotics-featured-video-inner { grid-template-columns: 1fr; gap: 28px; }
+    .robotics-featured-video .clean-video-card { max-width: 680px; }
+  }
   @media (max-width: 700px) {
     .arm-simple { padding-top: 40px; }
     .arm-carousel-arrow { top: calc(50% - 66px); width: 42px; height: 42px; }
@@ -2058,8 +2094,91 @@
     .arm-carousel-arrow.next { right: 10px; }
     .arm-carousel-caption { padding: 20px; min-height: 132px; }
     .project-video-section { margin-top: 56px; }
+    .arm-calm-hero .arm-simple-back { margin-bottom: 38px; }
+    .arm-calm-overview { grid-template-columns: 1fr; gap: 30px; }
+    .arm-calm-section-heading { display: block; }
+    .arm-calm-section-heading > p { margin-top: 14px; }
+    .arm-calm-carousel .arm-carousel-media { aspect-ratio: 4 / 3; }
+    .arm-calm-carousel .arm-carousel-caption { grid-template-columns: 34px 1fr; gap: 10px; }
+    .arm-calm-carousel .arm-carousel-caption p { grid-column: 2; }
+    .arm-calm-section { padding: 58px 0; }
+    .arm-video-placeholder { aspect-ratio: 4 / 3; padding: 24px; }
   }
+  @media (hover: hover) {
+    .education-card, .contact-card, .skill-card, .metric-card, .proof-card, .rob-stat-item {
+      transition: transform .24s ease, box-shadow .24s ease, border-color .24s ease;
+    }
+    .education-card:hover, .contact-card:hover, .skill-card:hover, .metric-card:hover, .proof-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 30px rgba(26,43,74,.1);
+      border-color: rgba(37,99,235,.28);
+    }
+    .rob-stat-item:hover { transform: translateY(-2px); background: rgba(255,255,255,.045); }
+    .robotics-team-photo img, .clean-video-card img { transition: transform .4s cubic-bezier(.22,.7,.2,1); }
+    .robotics-team-photo:hover img, .clean-video-card:hover img { transform: scale(1.025); }
+    .tag { transition: transform .2s ease, box-shadow .2s ease; }
+    .tag:hover { transform: translateY(-2px); box-shadow: 0 5px 12px rgba(26,43,74,.1); }
+  }
+  .btn:active, .project-view-button:active, .video-thumb-wrapper button:active { transform: translateY(1px) scale(.98); }
+  .easter-toast { position: fixed; left: 50%; bottom: 28px; z-index: 3002; display: flex; align-items: center; gap: 10px; max-width: calc(100vw - 32px); padding: 12px 17px; border: 1px solid rgba(147,180,255,.42); border-radius: 11px; background: linear-gradient(135deg,rgba(26,43,74,.98),rgba(25,55,105,.98)); color: white; font-family: var(--mono); font-size: .72rem; letter-spacing: .045em; box-shadow: 0 16px 38px rgba(15,23,42,.3), inset 0 1px rgba(255,255,255,.08); opacity: 0; transform: translate(-50%, 14px) scale(.98); pointer-events: none; transition: opacity .25s ease, transform .25s ease; overflow: hidden; }
+  .easter-toast::before { content: '✦'; display: grid; place-items: center; width: 24px; height: 24px; flex: 0 0 24px; border-radius: 50%; background: rgba(147,180,255,.16); color: #b9ceff; font-size: .8rem; }
+  .easter-toast::after { content: ''; position: absolute; inset: 0; background: linear-gradient(105deg,transparent 30%,rgba(255,255,255,.12),transparent 70%); transform: translateX(-110%); }
+  .easter-toast.show { opacity: 1; transform: translate(-50%, 0); }
+  .easter-toast.show::after { animation: easterShine .8s .12s ease-out; }
+  @keyframes easterShine { to { transform: translateX(110%); } }
+  .easter-flash { position: fixed; inset: 0; z-index: 2998; pointer-events: none; background: radial-gradient(circle at 50% 50%,rgba(96,165,250,.16),transparent 48%), linear-gradient(rgba(37,99,235,.045) 1px,transparent 1px), linear-gradient(90deg,rgba(37,99,235,.045) 1px,transparent 1px); background-size: auto,32px 32px,32px 32px; animation: easterFlash .85s ease-out forwards; }
+  @keyframes easterFlash { from { opacity: 0; } 30% { opacity: 1; } to { opacity: 0; } }
+  .logo-mark.easter-spin { animation: easterSpin .75s cubic-bezier(.2,.8,.2,1); }
+  @keyframes easterSpin { 50% { transform: rotate(180deg) scale(1.13); } 100% { transform: rotate(360deg) scale(1); } }
+  .arm-carousel.easter-complete { animation: easterComplete .8s cubic-bezier(.2,.8,.2,1); }
+  @keyframes easterComplete { 45% { transform: translateY(-4px) scale(1.01); filter: drop-shadow(0 10px 18px rgba(37,99,235,.2)); } }
+  .easter-spark { position: fixed; z-index: 3001; width: 8px; height: 8px; border-radius: 2px; background: var(--spark-color, var(--blue)); pointer-events: none; animation: sparkBurst .75s cubic-bezier(.2,.75,.25,1) forwards; }
+  @keyframes sparkBurst { from { opacity: 1; transform: translate(-50%,-50%) scale(.8) rotate(0); } to { opacity: 0; transform: translate(calc(-50% + var(--spark-x)),calc(-50% + var(--spark-y))) scale(.2) rotate(180deg); } }
+  .easter-part { position: fixed; z-index: 2999; pointer-events: none; color: var(--navy); animation: partFall var(--fall-speed,1.8s) cubic-bezier(.35,.05,.75,.35) forwards; filter: drop-shadow(0 3px 3px rgba(15,23,42,.18)); }
+  .easter-part.gear { width: auto; height: auto; background: none; color: var(--blue); font-family: Arial, sans-serif; font-size: var(--part-size,25px); line-height: 1; }
+  .easter-part.nut { width: var(--part-size,22px); height: var(--part-size,22px); background: radial-gradient(circle,transparent 0 24%,#64748b 26% 100%); clip-path: polygon(25% 7%,75% 7%,100% 50%,75% 93%,25% 93%,0 50%); }
+  .easter-part.bolt { width: calc(var(--part-size,22px) * .34); height: var(--part-size,22px); border-radius: 2px; background: repeating-linear-gradient(to bottom,#475569 0 3px,#94a3b8 3px 5px); }
+  .easter-part.bolt::before { content: ''; position: absolute; left: 50%; top: -4px; width: calc(var(--part-size,22px) * .72); height: 7px; border-radius: 2px; background: #334155; transform: translateX(-50%); }
+  .easter-part.bracket { width: var(--part-size,22px); height: var(--part-size,22px); border-left: 6px solid #64748b; border-bottom: 6px solid #64748b; border-radius: 0 0 0 3px; }
+  @keyframes partFall { 20% { opacity: 1; } to { transform: translate(var(--drift,0),110vh) rotate(var(--spin,540deg)); opacity: .12; } }
+  .easter-walker { position: fixed; left: 0; top: -8px; z-index: 3003; width: 58px; height: 74px; pointer-events: none; filter: drop-shadow(0 5px 5px rgba(15,23,42,.2)); }
+  .easter-walker-shell { position: absolute; inset: 0; transform: perspective(220px) rotateY(-24deg) rotateZ(3deg); transform-origin: 50% 100%; animation: robotBodyBob .64s ease-in-out infinite; transition: transform .2s ease; }
+  .easter-walker-shadow { position: absolute; left: 10px; top: 70px; z-index: -1; width: 38px; height: 6px; border-radius: 50%; background: radial-gradient(ellipse,rgba(15,42,82,.32),rgba(15,42,82,.08) 58%,transparent 74%); filter: blur(1px); animation: robotFootShadow .64s ease-in-out infinite; }
+  @keyframes robotBodyBob { 0%,100% { translate: 0 -1px; rotate: 0deg; } 25% { translate: 0 -3px; rotate: -.7deg; } 50% { translate: 0 -1px; rotate: 0deg; } 75% { translate: 0 -3px; rotate: .7deg; } }
+  @keyframes robotFootShadow { 0%,100% { opacity: .8; transform: translateX(-4px) scaleX(.88); } 50% { opacity: .95; transform: translateX(4px) scaleX(1.05); } }
+  .easter-robot-svg { position: relative; z-index: 1; width: 58px; height: 74px; overflow: visible; }
+  .robot-svg-head, .robot-svg-arm, .robot-svg-leg, .robot-svg-forearm, .robot-svg-shin { transform-box: fill-box; }
+  .robot-svg-head { transform-origin: 50% 100%; }
+  .robot-svg-arm { transform-origin: 50% 12%; }
+  .robot-svg-leg { transform-origin: 50% 8%; }
+  .robot-svg-forearm, .robot-svg-shin { transform-origin: 50% 8%; }
+  .robot-svg-arm.left { animation: robotArmSwing .64s ease-in-out infinite; }
+  .robot-svg-arm.right { animation: robotArmSwing .64s -.32s ease-in-out infinite; }
+  .robot-svg-forearm.left { animation: robotElbow .64s ease-in-out infinite; }
+  .robot-svg-forearm.right { animation: robotElbow .64s -.32s ease-in-out infinite; }
+  .robot-svg-leg.left { animation: robotHipStep .64s ease-in-out infinite; }
+  .robot-svg-leg.right { animation: robotHipStep .64s -.32s ease-in-out infinite; }
+  .robot-svg-shin.left { animation: robotKnee .64s ease-in-out infinite; }
+  .robot-svg-shin.right { animation: robotKnee .64s -.32s ease-in-out infinite; }
+  .robot-svg-core { animation: robotCore 1s ease-in-out infinite alternate; }
+  .robot-svg-eyes { transform: translateX(2px); }
+  @keyframes robotCore { from { opacity: .65; } to { opacity: 1; filter: drop-shadow(0 0 4px #60a5fa); } }
+  @keyframes robotArmSwing { 0%,100% { transform: rotate(18deg); } 50% { transform: rotate(-20deg); } }
+  @keyframes robotElbow { 0%,100% { transform: rotate(-8deg); } 45%,60% { transform: rotate(-30deg); } }
+  @keyframes robotHipStep { 0%,100% { transform: rotate(-22deg) translateY(-1px); } 45% { transform: rotate(5deg) translateY(2px); } 55% { transform: rotate(9deg) translateY(2px); } 75% { transform: rotate(24deg) translateY(-2px); } }
+  @keyframes robotKnee { 0%,40%,100% { transform: rotate(4deg); } 60%,78% { transform: rotate(27deg); } }
+  .easter-walker.paused .easter-walker-shell { transform: perspective(220px) rotateY(-8deg) rotateZ(0); }
+  .easter-walker.paused .easter-walker-shell, .easter-walker.paused .easter-walker-shadow, .easter-walker.paused .robot-svg-arm, .easter-walker.paused .robot-svg-leg, .easter-walker.paused .robot-svg-forearm, .easter-walker.paused .robot-svg-shin { animation-play-state: paused; }
+  .easter-walker.paused .robot-svg-head { animation: robotScan .65s ease-in-out infinite alternate; }
+  @keyframes robotScan { from { transform: translateX(-2px) rotate(-2deg); } to { transform: translateX(2px) rotate(2deg); } }
+  .easter-walker.poking .robot-svg-arm.right { animation: robotPoke .42s ease-in-out !important; }
+  @keyframes robotPoke { 50% { transform: translate(10px,-7px) rotate(-68deg) scaleY(1.22); } }
+  .easter-walker-bubble { position: absolute; left: 48px; top: 55px; width: max-content; max-width: 190px; padding: 7px 10px; border: 1px solid var(--border); border-radius: 8px 8px 8px 2px; background: white; color: var(--navy); font-family: var(--mono); font-size: .62rem; box-shadow: var(--shadow-sm); opacity: 0; transform: translateY(5px); transition: opacity .2s ease, transform .2s ease; }
+  .easter-walker.paused .easter-walker-bubble { opacity: 1; transform: translateY(0); }
+  .easter-button-tap { animation: easterButtonTap .55s ease !important; position: relative; z-index: 3001; }
+  @keyframes easterButtonTap { 35% { transform: scale(.94); box-shadow: 0 0 0 7px rgba(37,99,235,.2); } 70% { transform: scale(1.03); } }
   @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
     .arm-carousel-track { transition-duration: .01ms; }
     .clean-video-card { transition: none; }
     .clean-video-card:hover { transform: none; }
@@ -2072,12 +2191,12 @@
 <!-- ─── NAVIGATION ───────────────────────── -->
 <nav id="navbar">
   <div class="nav-inner">
-    <div class="nav-logo" aria-label="William Wright">
+    <a href="#" class="nav-logo" aria-label="Go to the home page" onclick="navigate('home');return false;">
       <div class="logo-mark" aria-hidden="true">
-        <span class="logo-letters"><span>W</span><span>W</span></span>
+        <img src="images/WW%20LOGO.png" alt="">
       </div>
-      William Wright
-    </div>
+      <span class="logo-name">William Wright</span>
+    </a>
     <ul class="nav-links" id="navLinks">
       <li><a href="#" onclick="navigate('home');return false;" data-page="home">Home</a></li>
       <li><a href="#" onclick="navigate('about');return false;" data-page="about">About</a></li>
@@ -2087,7 +2206,7 @@
       <li><a href="#" onclick="navigate('timeline');return false;" data-page="timeline">Timeline</a></li>
       <li><a href="#" onclick="navigate('contact');return false;" class="nav-cta" data-page="contact">Contact</a></li>
     </ul>
-    <button class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <button class="hamburger" id="hamburger" type="button" aria-label="Toggle navigation menu" aria-controls="navLinks" aria-expanded="false" onclick="toggleMenu()">
       <span></span><span></span><span></span>
     </button>
   </div>
@@ -2150,7 +2269,7 @@
       <div class="about-hero-inner">
         <div class="about-intro-text">
           <span class="section-label">About Me</span>
-          <h1 class="hero-name" style="font-size:clamp(2.2rem,4vw,3.6rem)">William<br>Wright</h1>
+          <h1 class="about-name">William Wright</h1>
           <div class="about-quote mt-6">
             "Curiosity drives my projects—and shapes how I approach every new challenge."
           </div>
@@ -2218,20 +2337,23 @@
     <div class="container single-project-wrap">
       <article class="project-showcase-card reveal">
         <a href="#" class="project-thumb-link" onclick="openProject('roboticarm');return false;" aria-label="Open 3D Printed Robotic Arm project">
-          <img src="images/robotic-arm-thumbnail.jpg" alt="3D printed robotic arm project" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+          <img src="images/timeline-arm.svg" alt="Illustration of the 3D printed robotic arm project" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
           <div class="asset-fallback" style="display:none;">
             <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M7 21h10M12 21v-4M8 17h8M9 17l-2-5 3-3 3 2 3-4 3 2-4 8"/></svg>
             <strong>Robotic arm thumbnail</strong>
             <span>images/robotic-arm-thumbnail.jpg</span>
           </div>
-          <span class="project-thumb-overlay">View Project →</span>
+          <span class="project-view-button project-view-overlay">
+            View Project
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </span>
         </a>
         <div class="project-showcase-content">
           <div class="project-title-row">
             <h2>3D Printed Robotic Arm</h2>
             <span class="tag tag-amber">In Progress</span>
           </div>
-          <p>Designing and building a 3D-printed robotic arm using CAD, servo motors, and iterative prototyping.</p>
+          <p>Designing and building a 3D printed robotic arm using CAD, servo motors, and iterative prototyping.</p>
           <div class="project-card-tags">
             <span class="tag tag-gray">CAD</span>
             <span class="tag tag-gray">3D Printing</span>
@@ -2247,209 +2369,73 @@
      PAGE: INDIVIDUAL PROJECT (Robotic Arm)
 ══════════════════════════════════════════════ -->
 <div class="page" id="page-project-robotic-arm">
-  <main class="arm-simple blueprint-bg">
-    <div class="container">
-      <header class="arm-simple-header">
+  <main class="arm-calm">
+    <header class="arm-calm-hero blueprint-bg">
+      <div class="container arm-calm-hero-inner">
         <a href="#" class="arm-simple-back" onclick="navigate('projects');return false;">← Back to Projects</a>
-        <div class="arm-simple-kicker">Project · In Progress</div>
-        <h1>3D Printed Robotic Arm</h1>
-        <p class="arm-simple-intro">A visual record of the arm from CAD design through printing, assembly, and motion testing.</p>
-      </header>
-
-      <div class="arm-carousel" id="armCarousel" aria-label="Robotic arm project gallery">
-        <div class="arm-carousel-viewport">
-          <div class="arm-carousel-track">
-            <article class="arm-carousel-slide">
-              <div class="arm-carousel-media"><img src="images/robotic-arm-hero.jpg" alt="Completed robotic arm project" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="arm-carousel-fallback"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 21h10M12 21v-4M8 17h8M9 17l-2-5 3-3 3 2 3-4 3 2-4 8"/></svg><strong>Project overview</strong><span>robotic-arm-hero.jpg</span></div></div>
-              <div class="arm-carousel-caption"><h2>Project Overview</h2><p>The current robotic-arm build combines a printed structure with servo-driven joints.</p></div>
-            </article>
-            <article class="arm-carousel-slide">
-              <div class="arm-carousel-media"><img src="images/robotic-arm-cad-assembly.jpg" alt="Full robotic arm CAD assembly" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="arm-carousel-fallback"><strong>Full CAD assembly</strong><span>robotic-arm-cad-assembly.jpg</span></div></div>
-              <div class="arm-carousel-caption"><h2>CAD Assembly</h2><p>The full model was used to plan the arm’s proportions, joint positions, and overall movement.</p></div>
-            </article>
-            <article class="arm-carousel-slide">
-              <div class="arm-carousel-media"><img src="images/robotic-arm-cad-detail.jpg" alt="Robotic arm joint and servo detail" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="arm-carousel-fallback"><strong>Joint and servo detail</strong><span>robotic-arm-cad-detail.jpg</span></div></div>
-              <div class="arm-carousel-caption"><h2>Joint Detail</h2><p>A closer view of how the servo, printed mount, and moving joint fit together.</p></div>
-            </article>
-            <article class="arm-carousel-slide">
-              <div class="arm-carousel-media"><img src="images/robotic-arm-exploded.jpg" alt="Exploded view of the robotic arm" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="arm-carousel-fallback"><strong>Exploded CAD view</strong><span>robotic-arm-exploded.jpg</span></div></div>
-              <div class="arm-carousel-caption"><h2>Exploded View</h2><p>The separated components show the arm’s printed parts, hardware, and assembly order.</p></div>
-            </article>
-            <article class="arm-carousel-slide">
-              <div class="arm-carousel-media"><img src="images/robotic-arm-timeline-1.jpg" alt="Initial robotic arm concept and CAD model" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="arm-carousel-fallback"><strong>Concept and CAD</strong><span>robotic-arm-timeline-1.jpg</span></div></div>
-              <div class="arm-carousel-caption"><h2>Plan &amp; Model</h2><p>The first stage defined the joint layout, servo placement, and intended range of motion.</p></div>
-            </article>
-            <article class="arm-carousel-slide">
-              <div class="arm-carousel-media"><img src="images/robotic-arm-timeline-2.jpg" alt="3D-printed robotic arm components" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="arm-carousel-fallback"><strong>Printed components</strong><span>robotic-arm-timeline-2.jpg</span></div></div>
-              <div class="arm-carousel-caption"><h2>Print &amp; Inspect</h2><p>Parts were printed and checked for fit, dimensional accuracy, and weak areas.</p></div>
-            </article>
-            <article class="arm-carousel-slide">
-              <div class="arm-carousel-media"><img src="images/robotic-arm-timeline-3.jpg" alt="Robotic arm during assembly" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="arm-carousel-fallback"><strong>Arm assembly</strong><span>robotic-arm-timeline-3.jpg</span></div></div>
-              <div class="arm-carousel-caption"><h2>Assembly</h2><p>Servos and fasteners were installed before checking clearances and joint stiffness.</p></div>
-            </article>
-            <article class="arm-carousel-slide">
-              <div class="arm-carousel-media"><img src="images/robotic-arm-timeline-4.jpg" alt="Robotic arm motion testing" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="arm-carousel-fallback"><strong>Motion testing</strong><span>robotic-arm-timeline-4.jpg</span></div></div>
-              <div class="arm-carousel-caption"><h2>Test &amp; Refine</h2><p>Motion tests reveal where joints, mounts, or geometry need another revision.</p></div>
-            </article>
+        <div class="arm-calm-hero-grid">
+          <div class="arm-calm-hero-copy">
+            <div class="arm-calm-status"><span></span>In progress</div>
+            <h1>3D Printed<br>Robotic Arm</h1>
+            <p>A compact, servo-driven arm designed in CAD and improved through printing, assembly, and hands-on testing.</p>
+            <div class="arm-calm-meta" aria-label="Project tools">
+              <span>Onshape</span><span>FDM Printing</span><span>Servo Control</span>
+            </div>
+          </div>
+          <div class="arm-video-placeholder arm-video-hero" role="img" aria-label="Placeholder for the upcoming robotic arm demonstration video">
+            <div class="arm-video-play" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 7.5v9l7-4.5-7-4.5Z"/></svg>
+            </div>
+            <strong>Demo video coming soon</strong>
+            <span>The latest motion test will appear here.</span>
           </div>
         </div>
-        <button class="arm-carousel-arrow prev" type="button" aria-label="Previous project image"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg></button>
-        <button class="arm-carousel-arrow next" type="button" aria-label="Next project image"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></button>
-        <div class="arm-carousel-footer"><div class="arm-carousel-dots" aria-label="Choose project image"></div><div class="arm-carousel-count" aria-live="polite">01 / 08</div></div>
       </div>
+    </header>
 
-      <section class="project-video-section" aria-labelledby="armVideoTitle">
-        <div class="project-video-heading">
-          <div class="arm-simple-kicker">Video</div>
-          <h2 id="armVideoTitle">Robotic Arm Demo</h2>
-          <p>A dedicated space for the latest motion test and final project demonstration.</p>
-        </div>
-        <div class="clean-video-card">
-          <video controls preload="metadata">
-            <source src="media/robotic-arm-demo.mp4" type="video/mp4">
-            Your browser does not support embedded video.
-          </video>
-          <div class="clean-video-copy">
-            <h3>Motion Test &amp; Project Demo</h3>
-            <p>This video will show the assembled arm, joint movement, and current testing progress.</p>
-            <span class="video-file-note">Awaiting upload · media/robotic-arm-demo.mp4</span>
-          </div>
-        </div>
-      </section>
-    </div>
-  </main>
-  <div class="proj-hero">
-    <div class="proj-hero-content">
-      <div class="proj-hero-nav">
-        <a href="#" class="btn btn-secondary" style="background:rgba(255,255,255,.1);color:rgba(255,255,255,.8);border-color:rgba(255,255,255,.2);" onclick="navigate('projects');return false;">← Back to Projects</a>
-      </div>
-      <div class="proj-hero-meta">
-        <span class="tag tag-amber">In Progress</span>
-        <span class="tag tag-blue">Robotics Club</span>
-        <span class="tag" style="background:rgba(255,255,255,.1);color:rgba(255,255,255,.72);">Onshape</span>
-        <span class="tag" style="background:rgba(255,255,255,.1);color:rgba(255,255,255,.72);">FDM 3D Printing</span>
-      </div>
-      <h1 class="proj-hero-title">3D Printed Robotic Arm</h1>
-      <p class="proj-hero-desc">Designing, printing, and integrating a multi-joint servo-driven robotic arm while balancing stiffness, torque, manufacturability, and controlled motion.</p>
-    </div>
-    <div class="proj-hero-img container">
-      <div class="asset-slot wide" style="height:100%;border-radius:var(--radius-lg) var(--radius-lg) 0 0;border:none;">
-        <img src="images/robotic-arm-hero.jpg" alt="Robotic arm project hero image" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-        <div class="asset-fallback" style="display:none;background:#12223d;color:rgba(255,255,255,.62);">
-          <strong style="color:white;">Robotic arm hero image</strong>
-          <span>images/robotic-arm-hero.jpg</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <section class="section-sm">
-    <div class="container">
-      <span class="section-label">Project Snapshot</span>
-      <div class="metrics-grid mt-4">
-        <div class="metric-card"><div class="metric-label">CAD</div><div class="metric-value" style="font-size:1.05rem;">Onshape</div></div>
-        <div class="metric-card"><div class="metric-label">Manufacturing</div><div class="metric-value" style="font-size:1.05rem;">FDM</div><div class="metric-sub">3D printed structure</div></div>
-        <div class="metric-card"><div class="metric-label">Actuation</div><div class="metric-value" style="font-size:1.05rem;">Servos</div><div class="metric-sub">Multi-joint motion</div></div>
-        <div class="metric-card"><div class="metric-label">Status</div><div class="metric-value" style="font-size:1.05rem;color:#92400E;">In Progress</div></div>
-      </div>
-    </div>
-  </section>
-
-  <div class="proj-section">
-    <div class="container">
-      <div class="proj-section-header"><span class="proj-section-num">01</span><h2 class="proj-section-title">Project Overview</h2></div>
-      <div class="case-intro-grid">
+    <section class="arm-calm-section">
+      <div class="container arm-calm-overview">
         <div>
-          <p class="proj-text">This project is a multi-joint robotic arm built around 3D-printed structural parts and servo actuation. The goal is to create a compact arm that can move reliably while keeping the structure lightweight, printable, and easy to revise.</p>
-          <p class="proj-text">The most important part of the project is not just making the arm move. It is designing each joint so the CAD geometry, printed parts, servo torque, and assembly tolerances work together as one system.</p>
-          <div class="key-list">
-            <div class="key-list-item">Model joints and linkages as a complete moving assembly in CAD.</div>
-            <div class="key-list-item">Design printable servo mounts with practical clearances and fastener access.</div>
-            <div class="key-list-item">Reduce flex and unnecessary mass where torque demands are highest.</div>
-            <div class="key-list-item">Test physical motion, identify weak points, and revise the design.</div>
+          <span class="section-label">The Project</span>
+          <h2>Making every part work together</h2>
+        </div>
+        <div class="arm-calm-copy">
+          <p>The goal is to build a lightweight arm that moves reliably. Each joint has to balance strength, weight, servo torque, printability, and range of motion.</p>
+          <p>The project is developed as one connected system: model, print, assemble, test, and revise.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="arm-calm-section arm-calm-gallery-section" aria-labelledby="armGalleryTitle">
+      <div class="container">
+        <div class="arm-calm-section-heading">
+          <div><span class="section-label">Design Process</span><h2 id="armGalleryTitle">From model to motion</h2></div>
+        </div>
+        <div class="arm-carousel arm-calm-carousel" id="armCarousel" aria-label="Robotic arm design process" tabindex="0">
+          <div class="arm-carousel-viewport">
+            <div class="arm-carousel-track">
+              <article class="arm-carousel-slide">
+                <div class="arm-carousel-media"><img src="images/timeline-cad.svg" alt="CAD workspace illustration"></div>
+                <div class="arm-carousel-caption"><span>01</span><h3>Model</h3><p>Plan the joint layout, link geometry, servo placement, and clearances in CAD.</p></div>
+              </article>
+              <article class="arm-carousel-slide">
+                <div class="arm-carousel-media"><img src="images/timeline-first-prints.svg" alt="3D printing illustration"></div>
+                <div class="arm-carousel-caption"><span>02</span><h3>Build</h3><p>Print the parts, inspect their fit, and assemble the servos and fasteners.</p></div>
+              </article>
+              <article class="arm-carousel-slide">
+                <div class="arm-carousel-media"><img src="images/timeline-arm.svg" alt="Robotic arm testing illustration"></div>
+                <div class="arm-carousel-caption"><span>03</span><h3>Refine</h3><p>Test motion under load and revise any joint that flexes, binds, or lacks torque.</p></div>
+              </article>
+            </div>
           </div>
+          <button class="arm-carousel-arrow prev" type="button" aria-label="Previous process stage"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg></button>
+          <button class="arm-carousel-arrow next" type="button" aria-label="Next process stage"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></button>
+          <div class="arm-carousel-footer"><div class="arm-carousel-dots" aria-label="Choose a process stage"></div><div class="arm-carousel-count" aria-live="polite">01 / 03</div></div>
         </div>
-        <aside class="case-callout">
-          <span class="section-label">Current Design Focus</span>
-          <div class="case-callout-grid">
-            <div class="case-callout-item"><strong>Shoulder torque</strong><span>The largest load occurs when the arm is extended.</span></div>
-            <div class="case-callout-item"><strong>Joint stiffness</strong><span>Printed links must resist flex without adding excessive weight.</span></div>
-            <div class="case-callout-item"><strong>Servo integration</strong><span>Mounts, clearances, fasteners, and range of motion must work together.</span></div>
-          </div>
-        </aside>
       </div>
-    </div>
-  </div>
+    </section>
 
-  <div class="proj-section" style="background:var(--gray-light);">
-    <div class="container">
-      <div class="proj-section-header"><span class="proj-section-num">02</span><h2 class="proj-section-title">CAD Development</h2></div>
-      <p class="proj-text" style="max-width:720px;margin-bottom:24px;">The CAD work documents how the arm is assembled and where the design decisions are concentrated. Replace these slots with your strongest assembly, joint-detail, and exploded-view screenshots.</p>
-      <div class="case-gallery">
-        <div class="asset-slot" onclick="openMediaLightbox(this)" role="button" tabindex="0">
-          <img src="images/robotic-arm-cad-assembly.jpg" alt="Robotic arm CAD assembly" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-          <div class="asset-fallback" style="display:none;"><strong>Full CAD assembly</strong><span>images/robotic-arm-cad-assembly.jpg</span></div>
-        </div>
-        <div class="asset-slot" onclick="openMediaLightbox(this)" role="button" tabindex="0">
-          <img src="images/robotic-arm-cad-detail.jpg" alt="Robotic arm CAD joint detail" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-          <div class="asset-fallback" style="display:none;"><strong>Joint / servo detail</strong><span>images/robotic-arm-cad-detail.jpg</span></div>
-        </div>
-        <div class="asset-slot" onclick="openMediaLightbox(this)" role="button" tabindex="0">
-          <img src="images/robotic-arm-exploded.jpg" alt="Robotic arm exploded CAD view" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-          <div class="asset-fallback" style="display:none;"><strong>Exploded view</strong><span>images/robotic-arm-exploded.jpg</span></div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="proj-section">
-    <div class="container">
-      <div class="proj-section-header"><span class="proj-section-num">03</span><h2 class="proj-section-title">Build Timeline</h2></div>
-      <div class="case-timeline">
-        <div class="case-step reveal">
-          <div class="asset-slot"><img src="images/robotic-arm-timeline-1.jpg" alt="Robotic arm concept and CAD stage" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="asset-fallback" style="display:none;"><strong>Concept / CAD</strong><span>timeline-1.jpg</span></div></div>
-          <div class="case-step-copy"><div class="case-step-num">Step 01</div><h3>Plan & Model</h3><p>Define joint layout, servo placement, link geometry, and intended range of motion.</p></div>
-        </div>
-        <div class="case-step reveal reveal-delay-1">
-          <div class="asset-slot"><img src="images/robotic-arm-timeline-2.jpg" alt="Robotic arm 3D printed parts" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="asset-fallback" style="display:none;"><strong>Printed parts</strong><span>timeline-2.jpg</span></div></div>
-          <div class="case-step-copy"><div class="case-step-num">Step 02</div><h3>Print & Inspect</h3><p>Fabricate parts, check fit, compare printed dimensions with the CAD intent, and identify weak areas.</p></div>
-        </div>
-        <div class="case-step reveal reveal-delay-2">
-          <div class="asset-slot"><img src="images/robotic-arm-timeline-3.jpg" alt="Robotic arm assembly stage" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="asset-fallback" style="display:none;"><strong>Assembly</strong><span>timeline-3.jpg</span></div></div>
-          <div class="case-step-copy"><div class="case-step-num">Step 03</div><h3>Assemble</h3><p>Install servos and fasteners, verify joint clearances, and evaluate mechanical stiffness.</p></div>
-        </div>
-        <div class="case-step reveal reveal-delay-3">
-          <div class="asset-slot"><img src="images/robotic-arm-timeline-4.jpg" alt="Robotic arm testing stage" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div class="asset-fallback" style="display:none;"><strong>Testing</strong><span>timeline-4.jpg</span></div></div>
-          <div class="case-step-copy"><div class="case-step-num">Step 04 · Current</div><h3>Test & Refine</h3><p>Evaluate motion under load and revise joints, mounts, or geometry where performance is limited.</p></div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="proj-section" style="background:var(--gray-light);">
-    <div class="container">
-      <div class="proj-section-header"><span class="proj-section-num">04</span><h2 class="proj-section-title">Final Product / Demo Video</h2></div>
-      <div class="video-frame">
-        <video controls preload="metadata" poster="images/robotic-arm-video-poster.jpg" id="roboticArmVideo">
-          <source src="media/robotic-arm-final.mp4" type="video/mp4">
-          Your browser does not support embedded video.
-        </video>
-        <div class="video-note">Add your final demonstration as media/robotic-arm-final.mp4. Until the project is complete, this can show the latest working motion test.</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="proj-section">
-    <div class="container">
-      <div class="proj-section-header"><span class="proj-section-num">05</span><h2 class="proj-section-title">What This Project Demonstrates</h2></div>
-      <div class="proof-grid">
-        <div class="proof-card"><strong>CAD Assembly Design</strong><p>Designing interacting components around real motion, hardware, and assembly constraints.</p></div>
-        <div class="proof-card"><strong>Design for 3D Printing</strong><p>Accounting for print orientation, clearances, tolerances, stiffness, and practical fabrication.</p></div>
-        <div class="proof-card"><strong>System Integration</strong><p>Connecting structure, servos, electronics, and motion requirements into one working mechanism.</p></div>
-        <div class="proof-card"><strong>Iterative Problem-Solving</strong><p>Using physical testing to identify limitations and make targeted design improvements.</p></div>
-      </div>
-    </div>
-  </div>
+  </main>
 </div>
 
 <!-- ═══════════════════════════════════════════
@@ -2496,6 +2482,26 @@
     </div>
   </div>
 
+  <section class="robotics-featured-video" aria-labelledby="clubVideoTitle">
+    <div class="container robotics-featured-video-inner">
+      <div class="project-video-heading">
+        <span class="section-label">Club Video</span>
+        <h2 id="clubVideoTitle">First Prototype</h2>
+        <p>An early look at the first working prototype and its initial testing process.</p>
+      </div>
+      <div class="clean-video-card">
+        <div class="video-thumb-wrapper">
+          <img src="images/thumbnail.png" alt="First Prototype thumbnail">
+          <button type="button" data-src="https://drive.google.com/file/d/19sDOL2qlcwASDrpnZgtKZuCL5GkzRSSK/preview" onclick="loadDrivePreview(this)">Play Prototype</button>
+        </div>
+        <div class="clean-video-copy">
+          <h3>First Prototype</h3>
+          <p>The first build documents the starting point for later mechanical and programming improvements.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="section-sm" style="background:var(--gray-light);border-top:1px solid var(--border);">
     <div class="container">
       <div class="proj-col-2">
@@ -2515,25 +2521,6 @@
             <img src="images/3PPLPic.png" alt="Three Robótica México teammates posing together">
             <figcaption>Teammates</figcaption>
           </figure>
-        </div>
-      </div>
-      <div class="club-video-section" aria-labelledby="clubVideoTitle">
-        <div class="project-video-heading">
-          <span class="section-label">Club Video</span>
-          <h2 id="clubVideoTitle">First Prototype</h2>
-          <p>An early look at the first working prototype and the initial testing process.</p>
-        </div>
-        <div class="club-video-layout">
-          <div class="clean-video-card">
-            <div class="video-thumb-wrapper">
-              <img src="images/thumbnail.png" alt="First Prototype thumbnail">
-              <button type="button" data-src="https://drive.google.com/file/d/1aOl43L5OHT_uXXCkLfigpWQDltyqokw-/preview" onclick="loadDrivePreview(this)">Play Prototype</button>
-            </div>
-            <div class="clean-video-copy">
-              <h3>First Prototype</h3>
-              <p>The first build documents the starting point for later mechanical and programming improvements.</p>
-            </div>
-          </div>
         </div>
       </div>
     </div>
@@ -2592,12 +2579,12 @@
         <div class="eng-timeline-item" role="button" tabindex="0" aria-expanded="false" onclick="toggleEngTimeline(this)" onkeydown="handleTimelineKey(event, this)">
           <div class="eng-tl-spacer" aria-hidden="true"></div>
           <div class="eng-tl-dot-wrap"><div class="eng-tl-dot">May<br>2026</div></div>
-          <div class="eng-tl-content"><img class="eng-tl-image" src="images/Geneva drive.png" alt="Geneva drive mechanism"><div class="eng-tl-copy"><div class="eng-tl-date">May 2026</div><div class="eng-tl-title">My First 3D-Printed Projects</div><div class="eng-tl-desc">Designed and printed small beginner mechanisms to learn how my Bambu Lab A1 works. These early projects helped me test printer settings, understand tolerances and moving parts, and see how CAD designs behave when they become real 3D-printed objects.</div><div class="eng-tl-prompt">View details</div></div></div>
+          <div class="eng-tl-content"><img class="eng-tl-image" src="images/Geneva drive.png" alt="Geneva drive mechanism"><div class="eng-tl-copy"><div class="eng-tl-date">May 2026</div><div class="eng-tl-title">My First 3D Printed Projects</div><div class="eng-tl-desc">Designed and printed small beginner mechanisms to learn how my Bambu Lab A1 works. These early projects helped me test printer settings, understand tolerances and moving parts, and see how CAD designs behave when they become real 3D printed objects.</div><div class="eng-tl-prompt">View details</div></div></div>
         </div>
         <div class="eng-timeline-item" role="button" tabindex="0" aria-expanded="false" onclick="toggleEngTimeline(this)" onkeydown="handleTimelineKey(event, this)">
           <div class="eng-tl-spacer" aria-hidden="true"></div>
           <div class="eng-tl-dot-wrap"><div class="eng-tl-dot">Jun<br>2026</div></div>
-          <div class="eng-tl-content"><img class="eng-tl-image" src="images/timeline-arm.svg" alt="Illustration of a robotic arm prototype"><div class="eng-tl-copy"><div class="eng-tl-date">June 2026</div><div class="eng-tl-title">3D Printed Robotic Arm - First Major Project</div><div class="eng-tl-desc">Began designing and building a servo-driven robotic arm with 3D-printed parts. The project brought CAD, fabrication, electronics, programming, and iterative testing together in one system.</div><div class="eng-tl-prompt">View details</div></div></div>
+          <div class="eng-tl-content"><img class="eng-tl-image" src="images/timeline-arm.svg" alt="Illustration of a robotic arm prototype"><div class="eng-tl-copy"><div class="eng-tl-date">June 2026</div><div class="eng-tl-title">3D Printed Robotic Arm - First Major Project</div><div class="eng-tl-desc">Began designing and building a servo-driven robotic arm with 3D printed parts. The project brought CAD, fabrication, electronics, programming, and iterative testing together in one system.</div><div class="eng-tl-prompt">View details</div></div></div>
         </div>
         <div class="eng-timeline-item" role="button" tabindex="0" aria-expanded="false" onclick="toggleEngTimeline(this)" onkeydown="handleTimelineKey(event, this)">
           <div class="eng-tl-spacer" aria-hidden="true"></div>
@@ -2656,7 +2643,7 @@
           <div class="contact-handle">Billywrightn@gmail.com</div>
           <div class="contact-desc">Best way to reach me about projects, opportunities, collaborations, or anything on this site.</div>
         </a>
-        <a href="https://www.linkedin.com/in/williambillywright/" class="contact-card reveal reveal-delay-1" target="_blank">
+        <a href="https://www.linkedin.com/in/williambillywright/" class="contact-card reveal reveal-delay-1" target="_blank" rel="noopener noreferrer">
           <div class="contact-icon linkedin">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
           </div>
@@ -2664,7 +2651,7 @@
           <div class="contact-handle">linkedin.com/in/williamwright</div>
           <div class="contact-desc">Professional profile with project highlights, education, skills, and experience.</div>
         </a>
-        <a href="https://github.com/BillyWr1ght" class="contact-card reveal reveal-delay-2" target="_blank">
+        <a href="https://github.com/BillyWr1ght" class="contact-card reveal reveal-delay-2" target="_blank" rel="noopener noreferrer">
           <div class="contact-icon github">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
           </div>
@@ -2698,8 +2685,8 @@
 </footer>
 
 <!-- ── LIGHTBOX ─────────────────────────────── -->
-<div class="lightbox" id="lightbox" onclick="closeLightbox()">
-  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Project image preview" onclick="closeLightbox()">
+  <button class="lightbox-close" type="button" aria-label="Close image preview" onclick="closeLightbox()">✕</button>
   <div class="lightbox-inner" onclick="event.stopPropagation()">
     <div class="img-placeholder lightbox-img">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:48px;height:48px;opacity:.3;"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
@@ -2729,7 +2716,7 @@ const PROJECTS = [
 
 const SKILLS = {
   cad: [
-    { name: 'Onshape', category: 'CAD', desc: 'Used for sketching, extrusion, part modeling, and the design of 3D-printed components.', related: ['Robotic arm project', 'CAD timeline entries'] },
+    { name: 'Onshape', category: 'CAD', desc: 'Used for sketching, extrusion, part modeling, and the design of 3D printed components.', related: ['Robotic arm project', 'CAD timeline entries'] },
     { name: 'SolidWorks', category: 'CAD', desc: 'Used for part-modeling and assembly practice alongside Onshape.', related: ['Independent CAD practice', 'About page'] },
   ],
   eng: [
@@ -2762,6 +2749,7 @@ function navigate(pageId) {
   document.dispatchEvent(new CustomEvent('pagechange', { detail: { pageId } }));
   // Close mobile menu
   document.getElementById('navLinks').classList.remove('open');
+  document.getElementById('hamburger').setAttribute('aria-expanded', 'false');
 }
 
 function openProject(id) {
@@ -2771,7 +2759,10 @@ function openProject(id) {
 }
 
 function toggleMenu() {
-  document.getElementById('navLinks').classList.toggle('open');
+  const links = document.getElementById('navLinks');
+  const button = document.getElementById('hamburger');
+  const isOpen = links.classList.toggle('open');
+  button.setAttribute('aria-expanded', String(isOpen));
 }
 
 // ── Scroll behavior ─────────────────────────────
@@ -2828,18 +2819,13 @@ function filterProjects() {
       currentFilter === 'CAD' && p.software.toLowerCase().includes('solidworks') ||
       currentFilter === '3D Printing' && (p.category === '3D Printing' || p.status === 'Completed');
 
-    // If filter didn't match via above, do extra check
-    const matchFilter2 = currentFilter === 'all' ||
-      p.category === currentFilter ||
-      p.status === currentFilter;
-
     const matchSearch = !query ||
       p.title.toLowerCase().includes(query) ||
       p.category.toLowerCase().includes(query) ||
       p.software.toLowerCase().includes(query) ||
       p.desc.toLowerCase().includes(query);
 
-    return matchFilter2 && matchSearch;
+    return matchFilter && matchSearch;
   });
   renderProjectGrid('projectsGrid', filtered);
 }
@@ -2910,7 +2896,9 @@ function initReveal() {
 
 // ── Lightbox ────────────────────────────────────
 function closeLightbox() {
-  document.getElementById('lightbox').classList.remove('open');
+  const box = document.getElementById('lightbox');
+  box.classList.remove('open');
+  document.body.style.overflow = '';
 }
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') closeLightbox();
@@ -3050,6 +3038,15 @@ function openMediaLightbox(slot) {
   holder.innerHTML = `<img src="${img.src}" alt="${img.alt}" style="width:100%;height:100%;object-fit:contain;background:#fff;">`;
   document.getElementById('lightboxLabel').textContent = img.alt || 'Project image';
   box.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  box.querySelector('.lightbox-close')?.focus();
+}
+
+function handleMediaKey(event, slot) {
+  if (event.key === 'Enter' || event.key === ' ') {
+    event.preventDefault();
+    openMediaLightbox(slot);
+  }
 }
 
 function initArmCarousel() {
@@ -3062,47 +3059,35 @@ function initArmCarousel() {
   const dotsHolder = carousel.querySelector('.arm-carousel-dots');
   const count = carousel.querySelector('.arm-carousel-count');
   let current = 0;
-  let timer;
 
   const dots = slides.map((_, index) => {
     const dot = document.createElement('button');
     dot.type = 'button';
     dot.className = 'arm-carousel-dot';
-    dot.setAttribute('aria-label', `Show project image ${index + 1}`);
-    dot.addEventListener('click', () => show(index, true));
+    dot.setAttribute('aria-label', `Show process stage ${index + 1}`);
+    dot.addEventListener('click', () => show(index));
     dotsHolder.appendChild(dot);
     return dot;
   });
 
-  function projectIsVisible() {
-    return document.getElementById('page-project-robotic-arm')?.classList.contains('active') && !document.hidden;
-  }
-
-  function schedule() {
-    window.clearTimeout(timer);
-    if (projectIsVisible()) timer = window.setTimeout(() => show(current + 1), 5000);
-  }
-
-  function show(index, manual = false) {
+  function show(index) {
     current = (index + slides.length) % slides.length;
     track.style.transform = `translateX(-${current * 100}%)`;
     slides.forEach((slide, slideIndex) => slide.setAttribute('aria-hidden', slideIndex === current ? 'false' : 'true'));
-    dots.forEach((dot, dotIndex) => dot.classList.toggle('active', dotIndex === current));
+    dots.forEach((dot, dotIndex) => {
+      const isCurrent = dotIndex === current;
+      dot.classList.toggle('active', isCurrent);
+      dot.setAttribute('aria-current', isCurrent ? 'true' : 'false');
+    });
     count.textContent = `${String(current + 1).padStart(2, '0')} / ${String(slides.length).padStart(2, '0')}`;
-    if (manual || projectIsVisible()) schedule();
   }
 
-  carousel.querySelector('.arm-carousel-arrow.prev')?.addEventListener('click', () => show(current - 1, true));
-  carousel.querySelector('.arm-carousel-arrow.next')?.addEventListener('click', () => show(current + 1, true));
+  carousel.querySelector('.arm-carousel-arrow.prev')?.addEventListener('click', () => show(current - 1));
+  carousel.querySelector('.arm-carousel-arrow.next')?.addEventListener('click', () => show(current + 1));
   carousel.addEventListener('keydown', event => {
-    if (event.key === 'ArrowLeft') show(current - 1, true);
-    if (event.key === 'ArrowRight') show(current + 1, true);
+    if (event.key === 'ArrowLeft') show(current - 1);
+    if (event.key === 'ArrowRight') show(current + 1);
   });
-  document.addEventListener('pagechange', event => {
-    window.clearTimeout(timer);
-    if (event.detail.pageId === 'project-robotic-arm') schedule();
-  });
-  document.addEventListener('visibilitychange', schedule);
 
   show(0);
 }
@@ -3123,6 +3108,200 @@ function loadDrivePreview(button) {
   wrapper.appendChild(iframe);
 }
 
+// Hidden details for curious visitors
+function initEasterEggs() {
+  const toast = document.createElement('div');
+  toast.className = 'easter-toast';
+  toast.setAttribute('role', 'status');
+  toast.setAttribute('aria-live', 'polite');
+  document.body.appendChild(toast);
+  let toastTimer;
+
+  function showSecret(message) {
+    toast.textContent = message;
+    toast.classList.remove('show');
+    void toast.offsetWidth;
+    toast.classList.add('show');
+    window.clearTimeout(toastTimer);
+    toastTimer = window.setTimeout(() => toast.classList.remove('show'), 2600);
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const flash = document.createElement('div');
+      flash.className = 'easter-flash';
+      document.body.appendChild(flash);
+      flash.addEventListener('animationend', () => flash.remove(), { once: true });
+    }
+  }
+
+  function replayAnimation(element, className) {
+    if (!element) return;
+    element.classList.remove(className);
+    void element.offsetWidth;
+    element.classList.add(className);
+    element.addEventListener('animationend', () => element.classList.remove(className), { once: true });
+  }
+
+  function burstAround(element, color) {
+    if (!element || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const rect = element.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    for (let i = 0; i < 12; i += 1) {
+      const angle = (Math.PI * 2 * i) / 12;
+      const distance = 38 + Math.random() * 34;
+      const spark = document.createElement('span');
+      spark.className = 'easter-spark';
+      spark.style.left = `${centerX}px`;
+      spark.style.top = `${centerY}px`;
+      spark.style.setProperty('--spark-x', `${Math.cos(angle) * distance}px`);
+      spark.style.setProperty('--spark-y', `${Math.sin(angle) * distance}px`);
+      spark.style.setProperty('--spark-color', color);
+      document.body.appendChild(spark);
+      spark.addEventListener('animationend', () => spark.remove(), { once: true });
+    }
+  }
+
+  const logoMark = document.querySelector('.nav-logo .logo-mark');
+  logoMark?.addEventListener('dblclick', event => {
+    event.preventDefault();
+    replayAnimation(logoMark, 'easter-spin');
+    burstAround(logoMark, '#2563eb');
+    showSecret('Double W unlocked — curiosity is an engineering skill.');
+  });
+
+  const processCarousel = document.getElementById('armCarousel');
+  const seenStages = new Set([0]);
+  function recordProcessStage() {
+    const slides = Array.from(processCarousel?.querySelectorAll('.arm-carousel-slide') || []);
+    const visibleIndex = slides.findIndex(slide => slide.getAttribute('aria-hidden') === 'false');
+    if (visibleIndex >= 0) seenStages.add(visibleIndex);
+    if (slides.length && seenStages.size === slides.length && !processCarousel.dataset.eggComplete) {
+      processCarousel.dataset.eggComplete = 'true';
+      replayAnimation(processCarousel, 'easter-complete');
+      burstAround(processCarousel, '#2563eb');
+      showSecret('Every strong design is built one thoughtful iteration at a time.');
+    }
+  }
+  processCarousel?.addEventListener('click', event => {
+    if (event.target.closest('.arm-carousel-arrow, .arm-carousel-dot')) recordProcessStage();
+  });
+  processCarousel?.addEventListener('keydown', event => {
+    if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') recordProcessStage();
+  });
+
+  async function launchRobotWalker() {
+    if (document.querySelector('.easter-walker') || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const walker = document.createElement('div');
+    walker.className = 'easter-walker';
+    walker.setAttribute('aria-hidden', 'true');
+    walker.innerHTML = `<div class="easter-walker-bubble">Nobody saw me…</div>
+      <div class="easter-walker-shadow"></div>
+      <div class="easter-walker-shell">
+        <svg class="easter-robot-svg" viewBox="0 0 86 110" aria-hidden="true">
+          <defs>
+            <linearGradient id="robotMetal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f8fbff"/><stop offset=".48" stop-color="#c8d8ee"/><stop offset="1" stop-color="#7fa4d8"/></linearGradient>
+            <linearGradient id="robotBlue" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#3b82f6"/><stop offset="1" stop-color="#173f7a"/></linearGradient>
+            <linearGradient id="robotVisor" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#071a35"/><stop offset=".5" stop-color="#13376d"/><stop offset="1" stop-color="#071a35"/></linearGradient>
+          </defs>
+          <g class="robot-svg-leg left"><rect x="27" y="78" width="11" height="13" rx="5" fill="url(#robotBlue)" stroke="#0f2b55" stroke-width="2"/><circle cx="32.5" cy="90" r="4" fill="#c8d8ee" stroke="#0f2b55" stroke-width="2"/><g class="robot-svg-shin left"><rect x="28" y="90" width="9" height="13" rx="4" fill="url(#robotMetal)" stroke="#0f2b55" stroke-width="2"/><path d="M23 101h17a4 4 0 0 1 4 4v2H23v-6Z" fill="#17345d" stroke="#0f2b55" stroke-width="1.5"/></g></g>
+          <g class="robot-svg-leg right"><rect x="48" y="78" width="11" height="13" rx="5" fill="url(#robotBlue)" stroke="#0f2b55" stroke-width="2"/><circle cx="53.5" cy="90" r="4" fill="#c8d8ee" stroke="#0f2b55" stroke-width="2"/><g class="robot-svg-shin right"><rect x="49" y="90" width="9" height="13" rx="4" fill="url(#robotMetal)" stroke="#0f2b55" stroke-width="2"/><path d="M46 101h17v6H42v-2a4 4 0 0 1 4-4Z" fill="#17345d" stroke="#0f2b55" stroke-width="1.5"/></g></g>
+          <g class="robot-svg-arm left"><circle cx="16" cy="53" r="7" fill="#9db9df" stroke="#102a52" stroke-width="2"/><rect x="11" y="55" width="10" height="15" rx="5" fill="url(#robotBlue)" stroke="#102a52" stroke-width="2"/><circle cx="16" cy="70" r="4" fill="#c8d8ee" stroke="#102a52" stroke-width="2"/><g class="robot-svg-forearm left"><rect x="11" y="70" width="10" height="14" rx="5" fill="url(#robotMetal)" stroke="#102a52" stroke-width="2"/><path d="M9 82h14v7H9z" fill="#17345d" stroke="#102a52" stroke-width="1.5"/></g></g>
+          <g class="robot-svg-arm right"><circle cx="70" cy="53" r="7" fill="#9db9df" stroke="#102a52" stroke-width="2"/><rect x="65" y="55" width="10" height="15" rx="5" fill="url(#robotBlue)" stroke="#102a52" stroke-width="2"/><circle cx="70" cy="70" r="4" fill="#c8d8ee" stroke="#102a52" stroke-width="2"/><g class="robot-svg-forearm right"><rect x="65" y="70" width="10" height="14" rx="5" fill="url(#robotMetal)" stroke="#102a52" stroke-width="2"/><path d="M63 82h14v7H63z" fill="#17345d" stroke="#102a52" stroke-width="1.5"/></g></g>
+          <path d="M26 43h34a7 7 0 0 1 7 7v28a10 10 0 0 1-10 10H29a10 10 0 0 1-10-10V50a7 7 0 0 1 7-7Z" fill="url(#robotMetal)" stroke="#102a52" stroke-width="3"/>
+          <path d="M25 50h36v22a10 10 0 0 1-10 10H35a10 10 0 0 1-10-10V50Z" fill="url(#robotBlue)" opacity=".94"/>
+          <path d="M30 55h26" stroke="#93b4ff" stroke-width="2" opacity=".65"/>
+          <circle class="robot-svg-core" cx="43" cy="68" r="8" fill="#60a5fa" stroke="#dbeafe" stroke-width="3"/><circle cx="43" cy="68" r="3" fill="white"/>
+          <path d="M34 82h18" stroke="#102a52" stroke-width="2" stroke-linecap="round"/>
+          <g class="robot-svg-head">
+            <path d="M29 15h28a9 9 0 0 1 9 9v17a9 9 0 0 1-9 9H29a9 9 0 0 1-9-9V24a9 9 0 0 1 9-9Z" fill="url(#robotMetal)" stroke="#102a52" stroke-width="3"/>
+            <path d="M26 25h34v14a6 6 0 0 1-6 6H32a6 6 0 0 1-6-6V25Z" fill="url(#robotVisor)"/>
+            <g class="robot-svg-eyes"><circle cx="35" cy="34" r="3.5" fill="#6ee7ff"/><circle cx="51" cy="34" r="3.5" fill="#6ee7ff"/><circle cx="35" cy="34" r="1.4" fill="white"/><circle cx="51" cy="34" r="1.4" fill="white"/></g>
+            <path d="M38 42h10" stroke="#7dd3fc" stroke-width="2" stroke-linecap="round"/>
+            <path d="M43 15V7" stroke="#102a52" stroke-width="3"/><circle cx="43" cy="5" r="4" fill="#f59e0b" stroke="#102a52" stroke-width="2"/>
+            <path d="M25 20c7-5 29-5 36 0" stroke="white" stroke-width="2" opacity=".7"/>
+          </g>
+        </svg>
+      </div>`;
+    document.body.appendChild(walker);
+    const bubble = walker.querySelector('.easter-walker-bubble');
+    const wait = duration => new Promise(resolve => window.setTimeout(resolve, duration));
+    const targets = ['home', 'projects', 'robotics']
+      .map(page => document.querySelector(`.nav-links a[data-page="${page}"]`))
+      .filter(Boolean);
+    const remarks = ['Let me try this one…', 'Projects? Mine now.', 'Robotics Club—perfect.'];
+    let currentX = -70;
+    walker.style.transform = `translateX(${currentX}px)`;
+
+    for (let index = 0; index < targets.length; index += 1) {
+      const control = targets[index];
+      const controlRect = control.getBoundingClientRect();
+      const fallbackCenter = window.innerWidth * ((index + 1) / (targets.length + 1));
+      const targetX = controlRect.width
+        ? Math.max(6, Math.min(window.innerWidth - 66, controlRect.left - 54))
+        : Math.max(6, Math.min(window.innerWidth - 66, fallbackCenter - 62));
+      const walk = walker.animate(
+        [{ transform: `translateX(${currentX}px)` }, { transform: `translateX(${targetX}px)` }],
+        { duration: Math.max(850, Math.abs(targetX - currentX) * 6), easing: 'linear', fill: 'forwards' }
+      );
+      await walk.finished;
+      currentX = targetX;
+      walker.style.transform = `translateX(${currentX}px)`;
+      walk.cancel();
+      walker.classList.add('paused');
+      bubble.textContent = remarks[index];
+      walker.classList.add('poking');
+      control.classList.remove('easter-button-tap');
+      void control.offsetWidth;
+      control.classList.add('easter-button-tap');
+      await wait(330);
+      navigate(control.dataset.page);
+      await wait(620);
+      control.classList.remove('easter-button-tap');
+      walker.classList.remove('poking');
+      walker.classList.remove('paused');
+    }
+
+    const exitX = window.innerWidth + 100;
+    const exitWalk = walker.animate(
+      [{ transform: `translateX(${currentX}px)` }, { transform: `translateX(${exitX}px)` }],
+      { duration: Math.max(1100, Math.abs(exitX - currentX) * 5), easing: 'linear', fill: 'forwards' }
+    );
+    await exitWalk.finished;
+    walker.remove();
+    showSecret('Curiosity tests every button—and learns what each one can do.');
+  }
+
+  let typed = '';
+  document.addEventListener('keydown', event => {
+    if (event.target instanceof HTMLInputElement || event.target instanceof HTMLTextAreaElement) return;
+
+    if (event.key.length === 1) typed = (typed + event.key.toLowerCase()).slice(-12);
+    if (typed.endsWith('robot')) {
+      showSecret('Every working machine begins with one clear instruction.');
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        const partTypes = ['gear', 'nut', 'bolt', 'bracket'];
+        for (let i = 0; i < 20; i += 1) {
+          const part = document.createElement('span');
+          const type = partTypes[i % partTypes.length];
+          part.className = `easter-part ${type}`;
+          if (type === 'gear') part.textContent = '⚙';
+          part.style.left = `${3 + Math.random() * 94}vw`;
+          part.style.top = `${-30 - Math.random() * 180}px`;
+          part.style.animationDelay = `${Math.random() * .45}s`;
+          part.style.setProperty('--part-size', `${17 + Math.random() * 18}px`);
+          part.style.setProperty('--fall-speed', `${1.5 + Math.random() * .8}s`);
+          part.style.setProperty('--drift', `${-45 + Math.random() * 90}px`);
+          const spin = (Math.random() > .5 ? 1 : -1) * (360 + Math.round(Math.random() * 540));
+          part.style.setProperty('--spin', `${spin}deg`);
+          document.body.appendChild(part);
+          part.addEventListener('animationend', () => part.remove(), { once: true });
+        }
+        launchRobotWalker();
+      }
+      typed = '';
+    }
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   // Skills
   renderSkillsGrid('cadSkillsGrid', SKILLS.cad);
@@ -3134,6 +3313,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initTilt();
   initPortraitSlideshow();
   initArmCarousel();
+  initEasterEggs();
 });
 </script>
 </body>
