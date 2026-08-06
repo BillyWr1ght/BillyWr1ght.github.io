@@ -57,6 +57,7 @@
   .home-secret-hint:hover { color: var(--blue); opacity: .95; }
   body.workshop-mode .home-secret-hint { color: #d99032; opacity: .72; }
   body.workshop-mode .home-secret-hint:hover { color: #ffc45b; opacity: 1; }
+  .home-secret-hint-mobile { display: none; }
 
   /* ── Blueprint SVG Grid Background ───────── */
   .blueprint-bg {
@@ -2362,14 +2363,20 @@
   @keyframes easterButtonTap { 35% { transform: scale(.94); box-shadow: 0 0 0 7px rgba(37,99,235,.2); } 70% { transform: scale(1.03); } }
   @media (max-width: 600px) {
     html, body { width: 100%; max-width: 100%; overflow-x: hidden; }
+    .reveal { opacity: 1 !important; transform: none !important; }
     .container { width: 100%; padding-inline: 16px; }
-    .nav-inner { height: 64px; padding-inline: 14px; gap: 8px; }
-    .nav-logo { min-width: 0; gap: 7px; }
+    .nav-inner { display: flex; height: 64px; padding-inline: 14px; gap: 10px; }
+    .nav-logo { min-width: 0; gap: 0; }
     .nav-logo .logo-mark { width: 38px; height: 38px; }
-    .nav-logo .logo-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: .84rem; }
-    .workshop-switch { margin-left: auto; }
-    .hamburger { flex: 0 0 auto; }
-    .nav-links.open { inset: 64px 0 0; margin: 0; padding: 20px 16px 32px; align-items: stretch; overflow-y: auto; }
+    .nav-logo .logo-name { display: none; }
+    .workshop-switch { display: grid !important; visibility: visible !important; opacity: 1 !important; position: fixed; z-index: 1002; right: 62px; top: 12px; place-items: center; width: 40px; height: 40px; margin: 0; background: rgba(255,255,255,.9); border-color: var(--border); }
+    .workshop-switch svg { display: block !important; color: #64748b; }
+    .hamburger { display: flex !important; visibility: visible !important; opacity: 1 !important; position: fixed; z-index: 1002; right: 12px; top: 12px; width: 40px; height: 40px; align-items: center; justify-content: center; background: rgba(255,255,255,.9); border: 1px solid var(--border); border-radius: 10px; }
+    .hamburger span { display: block !important; background: var(--navy) !important; }
+    body.workshop-mode .workshop-switch, body.workshop-mode .hamburger { background: rgba(16,20,22,.94); border-color: #3d484e; }
+    .nav-links { display: none !important; }
+    .nav-links.open { display: flex !important; position: fixed; inset: 64px 0 0; margin: 0; padding: 20px 16px 32px; align-items: stretch; overflow-y: auto; background: var(--white); }
+    body.workshop-mode .nav-links.open { background: #101416; }
     .nav-links.open li, .nav-links.open a { width: 100%; }
     .nav-links.open a { display: block; text-align: center; }
     .page { padding-top: 64px; }
@@ -2380,18 +2387,24 @@
 
     .home-hero-refined { min-height: auto; padding: 42px 0 52px; }
     .home-hero-grid { grid-template-columns: minmax(0,1fr); gap: 38px; }
+    .home-hero-grid > * { min-width: 0; }
     .hero-name { font-size: clamp(2.65rem,15vw,4rem); line-height: .96; }
-    .home-intro { font-size: .94rem; }
+    .home-intro { max-width: 100%; font-size: .94rem; overflow-wrap: anywhere; }
     .focus-line { align-items: flex-start; flex-wrap: wrap; }
     #focusWord { min-width: 0; }
     .portrait-stage { width: min(100%,330px); max-width: 330px; margin-inline: auto; justify-self: center; }
     .portrait-frame { width: 100%; border-radius: 20px; }
-    .portrait-arrow { width: 38px; height: 38px; background: rgba(255,255,255,.9); }
+    .portrait-arrow { display: grid; place-items: center; width: 40px; height: 40px; padding: 0; background: rgba(255,255,255,.94) !important; color: #1a2b4a !important; border: 1px solid rgba(26,43,74,.22); box-shadow: 0 4px 14px rgba(15,23,42,.18); }
+    .portrait-arrow svg { display: block; width: 22px; height: 22px; stroke: currentColor; }
+    body.workshop-mode .portrait-arrow { background: rgba(25,31,34,.96) !important; color: #f0ad4e !important; border-color: rgba(240,173,78,.55); }
     .portrait-arrow.prev { left: 8px; }
     .portrait-arrow.next { right: 8px; }
     .portrait-timer { left: 14px; right: 14px; bottom: 10px; }
     .orbital-ring { display: none; }
-    .home-secret-hint { margin: 8px 16px 14px auto; font-size: .58rem; }
+    .home-secret-hint { margin: 8px auto 14px; width: max-content; font-size: .65rem; }
+    .home-secret-hint-desktop { display: none; }
+    .home-secret-hint-mobile { display: inline-flex; align-items: center; min-height: 36px; padding: 7px 12px; border: 1px dashed currentColor; border-radius: 999px; background: rgba(255,255,255,.72); color: var(--blue); font: inherit; letter-spacing: inherit; cursor: pointer; }
+    body.workshop-mode .home-secret-hint-mobile { background: rgba(16,20,22,.76); color: #ffc45b; }
 
     .about-hero, .projects-hero, .skills-hero, .timeline-hero { padding-block: 48px; }
     .about-hero-inner { gap: 30px; }
@@ -2537,7 +2550,10 @@
     </div>
   </section>
 
-  <p class="home-secret-hint">psst—type “robot” for a surprise</p>
+  <p class="home-secret-hint">
+    <span class="home-secret-hint-desktop">psst—type “robot” for a surprise</span>
+    <button class="home-secret-hint-mobile" id="mobileRobotHint" type="button">tap for a surprise</button>
+  </p>
 </div>
 
 <!-- ═══════════════════════════════════════════
@@ -3749,15 +3765,20 @@ function initEasterEggs() {
   }
 
   let typed = '';
+  function triggerRobotSurprise() {
+    showSecret('Every working machine begins with one clear instruction.');
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      launchRobotWalker();
+    }
+  }
+
+  document.getElementById('mobileRobotHint')?.addEventListener('click', triggerRobotSurprise);
   document.addEventListener('keydown', event => {
     if (event.target instanceof HTMLInputElement || event.target instanceof HTMLTextAreaElement) return;
 
     if (event.key.length === 1) typed = (typed + event.key.toLowerCase()).slice(-12);
     if (typed.endsWith('robot')) {
-      showSecret('Every working machine begins with one clear instruction.');
-      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        launchRobotWalker();
-      }
+      triggerRobotSurprise();
       typed = '';
     }
   });
