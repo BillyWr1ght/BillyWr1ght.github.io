@@ -1206,7 +1206,8 @@
   .eng-tl-content:hover { border-color: rgba(37,99,235,.55); box-shadow: 0 16px 36px rgba(26,43,74,.12); transform: translateY(-2px); }
   .eng-timeline-item:focus { outline: none; }
   .eng-timeline-item:focus-visible .eng-tl-content { outline: 3px solid rgba(37,99,235,.3); outline-offset: 4px; }
-  .eng-tl-image { width: 100%; height: 100%; min-height: 230px; object-fit: cover; background: var(--blue-pale); box-shadow: inset 0 0 0 1px rgba(203,213,225,.95); }
+  .eng-tl-image { width: 100%; height: 270px; min-height: 270px; object-fit: cover; object-position: center; align-self: start; background: var(--blue-pale); box-shadow: inset 0 0 0 1px rgba(203,213,225,.95); }
+  .eng-tl-image-team { object-position: 50% 24%; }
   .eng-tl-copy { padding: 30px 32px; display: flex; flex-direction: column; align-items: flex-start; text-align: left; }
   .eng-tl-date {
     font-family: var(--mono);
@@ -1623,7 +1624,7 @@
     .eng-timeline::before { left: 20px; }
     .eng-tl-dot { width: 42px; height: 42px; font-size: .58rem; }
     .eng-tl-content { grid-template-columns: 1fr; }
-    .eng-tl-image { min-height: 180px; aspect-ratio: 16/9; }
+    .eng-tl-image { height: 205px; min-height: 205px; aspect-ratio: auto; }
     .eng-tl-copy { padding: 24px; }
     .nav-links { display: none; }
     .hamburger { display: flex; }
@@ -2425,6 +2426,8 @@
             <div class="portrait-slide"><img src="images/GP.webp" alt="Guinea pig portrait slideshow image 4"></div>
             <div class="portrait-slide"><img src="images/GP.webp" alt="Guinea pig portrait slideshow image 5"></div>
             <div class="portrait-slide"><img src="images/2nd%20Top%20Angle.jpg" alt="Top-angle view of an early CAD project"></div>
+            <div class="portrait-slide"><img src="images/car%20pic.jpg" alt="Car photo"></div>
+            <div class="portrait-slide"><img src="images/food%20pic.jpg" alt="Food photo"></div>
           </div>
           <div class="portrait-fallback" style="display:none;">
             <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
@@ -2783,7 +2786,7 @@
         <div class="eng-timeline-item" role="button" tabindex="0" aria-expanded="false" onclick="toggleEngTimeline(this)" onkeydown="handleTimelineKey(event, this)">
           <div class="eng-tl-spacer" aria-hidden="true"></div>
           <div class="eng-tl-dot-wrap"><div class="eng-tl-dot">Jul<br>2026</div></div>
-          <div class="eng-tl-content"><img class="eng-tl-image" src="images/timeline-team.svg" alt="Robotics team collaborating around a robot"><div class="eng-tl-copy"><div class="eng-tl-date">July 2026</div><div class="eng-tl-title">Joined a Robotics Team</div><div class="eng-tl-desc">Joined a robotics team and began applying CAD and programming skills in a collaborative setting. Learned to work within team constraints, communicate across specialties, and think about how mechanical and software systems affect one another.</div><div class="eng-tl-prompt">View details</div></div></div>
+          <div class="eng-tl-content"><img class="eng-tl-image eng-tl-image-team" src="images/Joined%20a%20robotics%20club%20pic.png" alt="William after joining a robotics club"><div class="eng-tl-copy"><div class="eng-tl-date">July 2026</div><div class="eng-tl-title">Joined a Robotics Team</div><div class="eng-tl-desc">Joined a robotics team and began applying CAD and programming skills in a collaborative setting. Learned to work within team constraints, communicate across specialties, and think about how mechanical and software systems affect one another.</div><div class="eng-tl-prompt">View details</div></div></div>
         </div>
         <div class="eng-timeline-item" role="button" tabindex="0" aria-expanded="false" onclick="toggleEngTimeline(this)" onkeydown="handleTimelineKey(event, this)">
           <div class="eng-tl-spacer" aria-hidden="true"></div>
@@ -3180,7 +3183,7 @@ function initPortraitSlideshow() {
 
   function scheduleAutoPlay() {
     window.clearTimeout(autoTimer);
-    if (homeIsVisible()) autoTimer = window.setTimeout(() => move(1), 2600);
+    if (homeIsVisible()) autoTimer = window.setTimeout(() => move(1), 2200);
   }
 
   function finishMove() {
