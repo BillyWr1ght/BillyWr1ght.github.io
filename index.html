@@ -2167,6 +2167,13 @@
     .tag { transition: transform .2s ease, box-shadow .2s ease; }
     .tag:hover { transform: translateY(-2px); box-shadow: 0 5px 12px rgba(26,43,74,.1); }
   }
+  /* Soft depth for Robotics Club photography */
+  .robotics-hero-photo img, .robotics-team-photo img {
+    filter: drop-shadow(0 5px 10px rgba(26,43,74,.11));
+  }
+  .robotics-hero-photo:hover img, .robotics-team-photo:hover img {
+    filter: brightness(1.015) drop-shadow(0 7px 14px rgba(26,43,74,.14));
+  }
   .btn:active, .project-view-button:active, .video-thumb-wrapper button:active { transform: translateY(1px) scale(.98); }
   .easter-toast { position: fixed; left: 50%; bottom: 28px; z-index: 3002; display: flex; align-items: center; gap: 10px; max-width: calc(100vw - 32px); padding: 12px 17px; border: 1px solid rgba(147,180,255,.42); border-radius: 11px; background: linear-gradient(135deg,rgba(26,43,74,.98),rgba(25,55,105,.98)); color: white; font-family: var(--mono); font-size: .72rem; letter-spacing: .045em; box-shadow: 0 16px 38px rgba(15,23,42,.3), inset 0 1px rgba(255,255,255,.08); opacity: 0; transform: translate(-50%, 14px) scale(.98); pointer-events: none; transition: opacity .25s ease, transform .25s ease; overflow: hidden; }
   .easter-toast::before { content: '✦'; display: grid; place-items: center; width: 24px; height: 24px; flex: 0 0 24px; border-radius: 50%; background: rgba(147,180,255,.16); color: #b9ceff; font-size: .8rem; }
@@ -3082,7 +3089,7 @@ function initPortraitSlideshow() {
 
   function scheduleAutoPlay() {
     window.clearTimeout(autoTimer);
-    if (homeIsVisible()) autoTimer = window.setTimeout(() => move(1), 4000);
+    if (homeIsVisible()) autoTimer = window.setTimeout(() => move(1), 2800);
   }
 
   function finishMove() {
@@ -3226,7 +3233,7 @@ function initEasterEggs() {
     void toast.offsetWidth;
     toast.classList.add('show');
     window.clearTimeout(toastTimer);
-    toastTimer = window.setTimeout(() => toast.classList.remove('show'), 2600);
+    toastTimer = window.setTimeout(() => toast.classList.remove('show'), 3600);
     if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       const flash = document.createElement('div');
       flash.className = 'easter-flash';
@@ -3268,7 +3275,7 @@ function initEasterEggs() {
     event.preventDefault();
     replayAnimation(logoMark, 'easter-spin');
     burstAround(logoMark, '#2563eb');
-    showSecret('Double W unlocked — curiosity is an engineering skill.');
+    showSecret('Double W unlocked—curiosity is an engineering skill.');
   });
 
   const processCarousel = document.getElementById('armCarousel');
@@ -3281,7 +3288,7 @@ function initEasterEggs() {
       processCarousel.dataset.eggComplete = 'true';
       replayAnimation(processCarousel, 'easter-complete');
       burstAround(processCarousel, '#2563eb');
-      showSecret('Every strong design is built one thoughtful iteration at a time.');
+      showSecret('Strong designs grow through patience and thoughtful iteration.');
     }
   }
   processCarousel?.addEventListener('click', event => {
@@ -3374,7 +3381,49 @@ function initEasterEggs() {
         easing: 'cubic-bezier(.4,0,.2,1)',
         fill: 'forwards'
       });
+      let logoWatchFrame;
+      if (index === 0 && logoMark) {
+        const logoRect = logoMark.getBoundingClientRect();
+        let logoIsSpinning = false;
+        let logoSpinAnimation;
+        const watchLogoCrossing = () => {
+          const walkerRect = walker.getBoundingClientRect();
+          if (!logoIsSpinning && walkerRect.right >= logoRect.left) {
+            logoIsSpinning = true;
+            logoSpinAnimation = logoMark.animate(
+              [
+                { transform: 'perspective(280px) rotateY(0deg)' },
+                { transform: 'perspective(280px) rotateY(360deg)' }
+              ],
+              { duration: 180, iterations: Infinity, easing: 'linear' }
+            );
+          }
+          if (logoIsSpinning && walkerRect.left > logoRect.right) {
+            window.setTimeout(() => {
+              const spinTime = Number(logoSpinAnimation?.currentTime || 0);
+              const currentAngle = ((spinTime % 180) / 180) * 360;
+              logoSpinAnimation?.cancel();
+              const settleAngle = currentAngle + (720 - currentAngle);
+              const logoSettle = logoMark.animate(
+                [
+                  { transform: `perspective(280px) rotateY(${currentAngle}deg)` },
+                  { transform: `perspective(280px) rotateY(${settleAngle}deg)` }
+                ],
+                { duration: 1100, easing: 'cubic-bezier(.12,.72,.18,1)', fill: 'forwards' }
+              );
+              logoSettle.finished.then(() => {
+                logoSettle.cancel();
+                logoMark.style.transform = '';
+              });
+            }, 500);
+            return;
+          }
+          logoWatchFrame = window.requestAnimationFrame(watchLogoCrossing);
+        };
+        logoWatchFrame = window.requestAnimationFrame(watchLogoCrossing);
+      }
       await walk.finished;
+      if (logoWatchFrame) window.cancelAnimationFrame(logoWatchFrame);
       window.clearTimeout(fullSpeedStart);
       window.clearTimeout(fullSpeedEnd);
       walker.classList.remove('walking', 'accelerating', 'full-speed', 'decelerating');
@@ -3465,7 +3514,7 @@ function initEasterEggs() {
     window.clearTimeout(exitFullSpeedEnd);
     walker.classList.remove('walking', 'accelerating', 'full-speed', 'decelerating');
     walker.remove();
-    showSecret('Curiosity tests every button—and learns what each one can do.');
+    showSecret('Keep building—every bold idea begins with one small step.');
   }
 
   let typed = '';
