@@ -1802,6 +1802,10 @@
     inset: 0;
     overflow: hidden;
   }
+  .portrait-timer { position: absolute; left: 18px; right: 18px; bottom: 12px; z-index: 6; height: 3px; overflow: hidden; border-radius: 999px; background: rgba(255,255,255,.35); box-shadow: 0 1px 4px rgba(15,23,42,.18); pointer-events: none; }
+  .portrait-timer span { display: block; width: 0; height: 100%; border-radius: inherit; background: var(--blue); box-shadow: 0 0 7px color-mix(in srgb,var(--blue) 65%,transparent); }
+  .portrait-timer.running span { animation: portraitTimerFill 1.5s linear forwards; }
+  @keyframes portraitTimerFill { from { width: 0; } to { width: 100%; } }
   .portrait-track {
     display: flex;
     gap: 12px;
@@ -2356,6 +2360,98 @@
   .easter-walker.paused .easter-walker-bubble { opacity: 1; transform: translateY(0) scale(1); }
   .easter-button-tap { animation: easterButtonTap .55s ease !important; position: relative; z-index: 3001; }
   @keyframes easterButtonTap { 35% { transform: scale(.94); box-shadow: 0 0 0 7px rgba(37,99,235,.2); } 70% { transform: scale(1.03); } }
+  @media (max-width: 600px) {
+    html, body { width: 100%; max-width: 100%; overflow-x: hidden; }
+    .container { width: 100%; padding-inline: 16px; }
+    .nav-inner { height: 64px; padding-inline: 14px; gap: 8px; }
+    .nav-logo { min-width: 0; gap: 7px; }
+    .nav-logo .logo-mark { width: 38px; height: 38px; }
+    .nav-logo .logo-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: .84rem; }
+    .workshop-switch { margin-left: auto; }
+    .hamburger { flex: 0 0 auto; }
+    .nav-links.open { inset: 64px 0 0; margin: 0; padding: 20px 16px 32px; align-items: stretch; overflow-y: auto; }
+    .nav-links.open li, .nav-links.open a { width: 100%; }
+    .nav-links.open a { display: block; text-align: center; }
+    .page { padding-top: 64px; }
+    .section { padding-block: 52px; }
+    .section-sm { padding-block: 38px; }
+    .section-title { font-size: clamp(1.75rem,9vw,2.35rem); }
+    .section-sub { font-size: .9rem; }
+
+    .home-hero-refined { min-height: auto; padding: 42px 0 52px; }
+    .home-hero-grid { grid-template-columns: minmax(0,1fr); gap: 38px; }
+    .hero-name { font-size: clamp(2.65rem,15vw,4rem); line-height: .96; }
+    .home-intro { font-size: .94rem; }
+    .focus-line { align-items: flex-start; flex-wrap: wrap; }
+    #focusWord { min-width: 0; }
+    .portrait-stage { width: min(100%,330px); max-width: 330px; margin-inline: auto; justify-self: center; }
+    .portrait-frame { width: 100%; border-radius: 20px; }
+    .portrait-arrow { width: 38px; height: 38px; background: rgba(255,255,255,.9); }
+    .portrait-arrow.prev { left: 8px; }
+    .portrait-arrow.next { right: 8px; }
+    .portrait-timer { left: 14px; right: 14px; bottom: 10px; }
+    .orbital-ring { display: none; }
+    .home-secret-hint { margin: 8px 16px 14px auto; font-size: .58rem; }
+
+    .about-hero, .projects-hero, .skills-hero, .timeline-hero { padding-block: 48px; }
+    .about-hero-inner { gap: 30px; }
+    .about-name { font-size: clamp(2.2rem,12vw,3.2rem); }
+    .about-photo { width: min(100%,340px); justify-self: center; }
+    .about-photo-image { min-height: 320px; }
+    .interests-grid, .skills-grid, .contact-grid, .project-grid { grid-template-columns: minmax(0,1fr); }
+    .skill-card, .contact-card, .education-card, .value-card { min-width: 0; }
+
+    .project-showcase-card { grid-template-columns: minmax(0,1fr); }
+    .project-thumb-link { min-height: 220px; }
+    .project-showcase-content { padding: 20px 18px 22px; }
+    .project-title-row { align-items: flex-start; flex-direction: column; gap: 8px; }
+    .project-view-button { width: 100%; }
+    .case-intro-grid, .case-gallery, .case-timeline, .proof-grid { grid-template-columns: minmax(0,1fr); }
+
+    .eng-timeline { width: 100%; }
+    .eng-timeline-item { grid-template-columns: 38px minmax(0,1fr); gap: 10px; margin-bottom: 38px; }
+    .eng-timeline::before { left: 18px; }
+    .eng-tl-dot { width: 38px; height: 38px; font-size: .5rem; }
+    .eng-tl-content { grid-template-columns: minmax(0,1fr); }
+    .eng-tl-image { width: 100%; height: 210px; min-height: 210px; }
+    .eng-tl-copy { padding: 21px 18px; }
+    .eng-tl-title { font-size: 1.08rem; }
+
+    .robotics-band { padding-top: 44px; }
+    .robotics-hero-layout { grid-template-columns: minmax(0,1fr); gap: 28px; padding-bottom: 44px; }
+    .robotics-title { font-size: clamp(2.25rem,12vw,3.2rem); }
+    .robotics-hero-photo { border-radius: 14px; }
+    .robotics-stats { grid-template-columns: minmax(0,1fr); padding: 16px; }
+    .rob-stat-item { min-height: 76px; padding: 12px; border-right: 0; justify-content: flex-start; }
+    .rob-stat-icon { width: 40px; height: 40px; }
+    .robotics-team-gallery { grid-template-columns: minmax(0,1fr); gap: 16px; }
+    .robotics-team-photo, .robotics-team-gallery .robotics-club-logo { width: 100%; }
+    .robotics-featured-video { padding: 48px 0; }
+    .robotics-featured-video-inner { grid-template-columns: minmax(0,1fr); gap: 24px; }
+
+    .arm-simple, .arm-calm-hero, .arm-calm-section { padding-block: 46px; }
+    .arm-calm-hero-grid, .arm-calm-overview { grid-template-columns: minmax(0,1fr); gap: 28px; }
+    .arm-calm-hero h1 { font-size: clamp(2.15rem,12vw,3.1rem); }
+    .arm-carousel { width: 100%; }
+    .arm-carousel-viewport { border-radius: 16px; }
+    .arm-carousel-media { min-height: 0; }
+    .arm-carousel-caption, .arm-calm-carousel .arm-carousel-caption { display: grid; grid-template-columns: 30px minmax(0,1fr); gap: 10px; padding: 18px 16px 20px; }
+    .arm-calm-carousel .arm-carousel-caption p { grid-column: 1 / -1; }
+    .arm-carousel-arrow { top: 32%; width: 38px; height: 38px; }
+    .arm-carousel-arrow.prev { left: 8px; }
+    .arm-carousel-arrow.next { right: 8px; }
+    .arm-carousel-footer { gap: 10px; }
+    .video-play-icon { width: 56px; height: 56px; }
+    .video-play-label { font-size: .9rem; }
+
+    .lightbox { padding: 12px; }
+    .lightbox-inner { width: 100%; max-height: calc(100vh - 24px); padding: 12px; }
+    .lightbox-img { max-height: calc(100vh - 80px); }
+    footer { padding-inline: 16px; }
+    img:hover { transform: none; }
+    .easter-toast { bottom: 16px; width: max-content; max-width: calc(100vw - 24px); font-size: .64rem; }
+    .easter-walker-bubble { left: 32px; max-width: 140px; font-size: .55rem; }
+  }
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
     .arm-carousel-track { transition-duration: .01ms; }
@@ -2420,20 +2516,16 @@
         <div class="orbital-ring"></div>
         <div class="portrait-frame" id="portraitFrame">
           <div class="portrait-slideshow" id="portraitSlideshow">
-            <div class="portrait-slide"><img src="images/GP.webp" alt="Portrait of a guinea pig" onerror="this.closest('.portrait-slideshow').style.display='none';this.closest('.portrait-frame').querySelector('.portrait-fallback').style.display='flex';"></div>
-            <div class="portrait-slide"><img src="images/GP.webp" alt="Guinea pig portrait slideshow image 2"></div>
-            <div class="portrait-slide"><img src="images/GP.webp" alt="Guinea pig portrait slideshow image 3"></div>
-            <div class="portrait-slide"><img src="images/GP.webp" alt="Guinea pig portrait slideshow image 4"></div>
-            <div class="portrait-slide"><img src="images/GP.webp" alt="Guinea pig portrait slideshow image 5"></div>
             <div class="portrait-slide"><img src="images/2nd%20Top%20Angle.jpg" alt="Top-angle view of an early CAD project"></div>
             <div class="portrait-slide"><img src="images/car%20pic.jpg" alt="Car photo"></div>
             <div class="portrait-slide"><img src="images/food%20pic.jpg" alt="Food photo"></div>
           </div>
           <div class="portrait-fallback" style="display:none;">
             <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-            <strong>Your portrait goes here</strong>
-            <span>images/GP.webp</span>
+            <strong>Carousel image unavailable</strong>
+            <span>Please check the image files</span>
           </div>
+          <div class="portrait-timer" id="portraitTimer" aria-hidden="true"><span></span></div>
         </div>
         <button class="portrait-arrow prev" type="button" aria-label="Previous slide">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
@@ -3162,6 +3254,7 @@ function initPortraitSlideshow() {
   const stage = slideshow.closest('.portrait-stage');
   const previousButton = stage?.querySelector('.portrait-arrow.prev');
   const nextButton = stage?.querySelector('.portrait-arrow.next');
+  const portraitTimer = stage?.querySelector('.portrait-timer');
   let index = 1;
   let autoTimer;
   let transitionTimer;
@@ -3183,7 +3276,12 @@ function initPortraitSlideshow() {
 
   function scheduleAutoPlay() {
     window.clearTimeout(autoTimer);
-    if (homeIsVisible()) autoTimer = window.setTimeout(() => move(1), 2200);
+    portraitTimer?.classList.remove('running');
+    if (homeIsVisible()) {
+      void portraitTimer?.offsetWidth;
+      portraitTimer?.classList.add('running');
+      autoTimer = window.setTimeout(() => move(1), 1500);
+    }
   }
 
   function finishMove() {
@@ -3208,6 +3306,7 @@ function initPortraitSlideshow() {
     outgoingSlide?.classList.add('fade-away');
     index += direction;
     render();
+    portraitTimer?.classList.remove('running');
     window.clearTimeout(autoTimer);
     window.clearTimeout(transitionTimer);
     transitionTimer = window.setTimeout(finishMove, 750);
