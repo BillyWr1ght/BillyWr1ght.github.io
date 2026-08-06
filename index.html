@@ -2373,11 +2373,11 @@
     .workshop-switch { display: grid !important; visibility: visible !important; opacity: 1 !important; position: absolute; z-index: 2; right: 3px; top: 17px; place-items: center; width: 30px; height: 30px; margin: 0; background: transparent; border-color: transparent; }
     .workshop-switch svg { display: block !important; color: #64748b; }
     .hamburger { display: none !important; }
-    .nav-links, .nav-links.open { display: grid !important; position: absolute; inset: 0 35px 0 3px; grid-template-columns: repeat(7,minmax(0,1fr)); width: auto; min-width: 0; height: 64px; margin: 0; padding: 0; gap: 0; align-items: center; overflow: hidden; background: transparent; touch-action: pan-y; }
+    .nav-links, .nav-links.open { display: flex !important; position: absolute; inset: 0 39px 0 0; width: auto; min-width: 0; height: 64px; margin: 0; padding: 0 8px; gap: 2px; align-items: center; overflow-x: auto; overflow-y: hidden; background: transparent; touch-action: pan-x pan-y; scroll-snap-type: x proximity; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
     .nav-links::-webkit-scrollbar { display: none; }
-    .nav-links li { width: auto; min-width: 0; }
-    .nav-links a, .nav-links.open a { display: block; width: 100%; padding: 7px 0; border-radius: 6px; font-size: clamp(.43rem,1.8vw,.55rem); letter-spacing: -.045em; line-height: 1; white-space: nowrap; text-align: center; }
-    .nav-links .nav-cta { padding: 7px 1px !important; }
+    .nav-links li { flex: 0 0 auto; min-width: 0; scroll-snap-align: start; }
+    .nav-links a, .nav-links.open a { display: flex; align-items: center; justify-content: center; width: auto; min-height: 42px; padding: 10px 12px; border-radius: 8px; font-size: .78rem; letter-spacing: -.01em; line-height: 1.1; white-space: nowrap; text-align: center; }
+    .nav-links .nav-cta { padding: 10px 14px !important; }
     body:not(.workshop-mode), body:not(.workshop-mode) .page, body:not(.workshop-mode) :is(.home-hero-refined,.about-hero,.projects-hero,.skills-hero,.timeline-hero,.section,.section-sm,.robotics-band,.robotics-featured-video,.arm-simple,.arm-calm,.arm-calm-section,.arm-calm-gallery-section) { background-color: #fff; }
     body.workshop-mode, body.workshop-mode .page, body.workshop-mode :is(.home-hero-refined,.about-hero,.projects-hero,.skills-hero,.timeline-hero,.section,.section-sm,.robotics-band,.robotics-featured-video,.arm-simple,.arm-calm,.arm-calm-section,.arm-calm-gallery-section) { background-color: #111416 !important; }
     body.workshop-mode :is(.home-skills-strip,.robotics-stats-wrap,.robotics-stats,.case-callout,.video-note,footer) { background-color: #0d1012 !important; }
@@ -2465,7 +2465,8 @@
     footer { padding-inline: 16px; }
     img:hover { transform: none; }
     .easter-toast { bottom: 16px; width: max-content; max-width: calc(100vw - 24px); font-size: .64rem; }
-    .easter-walker-bubble { left: 32px; max-width: 140px; font-size: .55rem; }
+    .easter-walker { top: 70px; z-index: 9000; }
+    .easter-walker-bubble { left: 32px; max-width: 160px; font-size: .65rem; }
   }
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
@@ -2535,7 +2536,7 @@
             <div class="portrait-slide"><img src="images/car%20pic.jpg" alt="Car photo"></div>
             <div class="portrait-slide"><img src="images/food%20pic.jpg" alt="Food photo"></div>
             <div class="portrait-slide"><img src="images/solo%20pic%20restaurant.png" alt="Solo photo at a restaurant"></div>
-            <div class="portrait-slide"><img src="images/MJ%20PIC.JPG" alt="MJ photo"></div>
+            <div class="portrait-slide"><img src="images/MJ%20PIC%20cleaned.png" alt="MJ photo"></div>
           </div>
           <div class="portrait-fallback" style="display:none;">
             <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
