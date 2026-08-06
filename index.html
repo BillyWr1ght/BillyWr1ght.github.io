@@ -2365,20 +2365,16 @@
     html, body { width: 100%; max-width: 100%; overflow-x: hidden; }
     .reveal { opacity: 1 !important; transform: none !important; }
     .container { width: 100%; padding-inline: 16px; }
-    .nav-inner { display: flex; height: 64px; padding-inline: 14px; gap: 10px; }
-    .nav-logo { min-width: 0; gap: 0; }
-    .nav-logo .logo-mark { width: 38px; height: 38px; }
-    .nav-logo .logo-name { display: none; }
-    .workshop-switch { display: grid !important; visibility: visible !important; opacity: 1 !important; position: fixed; z-index: 1002; right: 62px; top: 12px; place-items: center; width: 40px; height: 40px; margin: 0; background: rgba(255,255,255,.9); border-color: var(--border); }
+    .nav-inner { display: flex; width: 100%; height: 64px; padding-inline: 8px; gap: 6px; overflow: hidden; }
+    .nav-logo { display: none; }
+    .workshop-switch { display: grid !important; visibility: visible !important; opacity: 1 !important; position: static; z-index: auto; flex: 0 0 36px; place-items: center; width: 36px; height: 36px; margin: 0; background: transparent; border-color: transparent; }
     .workshop-switch svg { display: block !important; color: #64748b; }
-    .hamburger { display: flex !important; visibility: visible !important; opacity: 1 !important; position: fixed; z-index: 1002; right: 12px; top: 12px; width: 40px; height: 40px; align-items: center; justify-content: center; background: rgba(255,255,255,.9); border: 1px solid var(--border); border-radius: 10px; }
-    .hamburger span { display: block !important; background: var(--navy) !important; }
-    body.workshop-mode .workshop-switch, body.workshop-mode .hamburger { background: rgba(16,20,22,.94); border-color: #3d484e; }
-    .nav-links { display: none !important; }
-    .nav-links.open { display: flex !important; position: fixed; inset: 64px 0 0; margin: 0; padding: 20px 16px 32px; align-items: stretch; overflow-y: auto; background: var(--white); }
-    body.workshop-mode .nav-links.open { background: #101416; }
-    .nav-links.open li, .nav-links.open a { width: 100%; }
-    .nav-links.open a { display: block; text-align: center; }
+    .hamburger { display: none !important; }
+    .nav-links, .nav-links.open { display: flex !important; position: static; flex: 1 1 calc(100% - 42px); width: calc(100% - 42px); min-width: 0; height: 64px; margin: 0; padding: 0 2px; gap: 2px; flex-flow: row nowrap !important; align-items: center; justify-content: flex-start; overflow-x: auto; overflow-y: hidden; background: transparent; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+    .nav-links::-webkit-scrollbar { display: none; }
+    .nav-links li { flex: 0 0 auto; width: auto; }
+    .nav-links a, .nav-links.open a { display: block; width: auto; padding: 8px 7px; border-radius: 7px; font-size: .68rem; line-height: 1; white-space: nowrap; text-align: center; }
+    .nav-links .nav-cta { padding: 8px 9px !important; }
     .page { padding-top: 64px; }
     .section { padding-block: 52px; }
     .section-sm { padding-block: 38px; }
@@ -3595,7 +3591,7 @@ function initEasterEggs() {
       const controlRect = control.getBoundingClientRect();
       const fallbackCenter = window.innerWidth * ((index + 1) / (targets.length + 1));
       const targetX = controlRect.width
-        ? Math.max(6, Math.min(window.innerWidth - 66, controlRect.left - 54))
+        ? Math.max(6, Math.min(window.innerWidth - 66, controlRect.left + (controlRect.width / 2) - 56))
         : Math.max(6, Math.min(window.innerWidth - 66, fallbackCenter - 62));
       walker.classList.remove('scurrying', 'tiptoeing', 'looking-back');
       walker.classList.add(movement.className);
