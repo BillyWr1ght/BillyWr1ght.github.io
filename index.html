@@ -2264,7 +2264,6 @@
   .skills-grid,.contact-grid,.eng-timeline,.education-grid,.project-showcase-card { position: relative; }
   .skills-grid::after { content: '≈'; position: absolute; right: 12%; bottom: -42px; color: var(--blue); font: 700 2.1rem/1 var(--mono); opacity: .42; pointer-events: none; animation: decorWaveBounce 3s ease-in-out infinite; }
   .contact-grid::before { content: '↗'; position: absolute; left: 45%; bottom: -48px; color: var(--blue); font: 400 2rem/1 var(--mono); opacity: .46; pointer-events: none; animation: decorPaperSignal 3.8s cubic-bezier(.4,0,.2,1) infinite; }
-  .eng-timeline::after { content: ''; position: absolute; top: 12px; left: 22px; z-index: 2; width: 10px; height: 24px; border-radius: 3px; background: var(--blue); box-shadow: 0 0 13px color-mix(in srgb,var(--blue) 65%,transparent); pointer-events: none; animation: decorTimelineRunner 7s ease-in-out infinite; }
   .education-grid::after { content: '[ ]'; position: absolute; left: 8%; bottom: -44px; color: var(--blue); font: 700 1.25rem/1 var(--mono); letter-spacing: .18em; opacity: .38; pointer-events: none; animation: decorBracketSlide 4.8s ease-in-out infinite; }
   .project-showcase-card::after { content: ''; position: absolute; top: 0; bottom: 0; left: 0; z-index: 3; width: 1px; background: linear-gradient(transparent,color-mix(in srgb,var(--blue) 55%,transparent),transparent); opacity: .28; pointer-events: none; animation: decorCardScanner 7.5s ease-in-out infinite; }
 
@@ -2276,7 +2275,6 @@
   @keyframes decorContactSignal { 0%,100% { translate: 0 0; scale: .9; } 50% { translate: -18px -8px; scale: 1.15; text-shadow: 0 0 18px var(--blue); } }
   @keyframes decorWaveBounce { 0%,100% { translate: 0 0; rotate: -5deg; } 50% { translate: -34px -12px; rotate: 7deg; scale: 1.18; } }
   @keyframes decorPaperSignal { 0%,100% { translate: -28px 8px; opacity: .22; } 50% { translate: 30px -20px; opacity: .8; text-shadow: 0 0 12px var(--blue); } }
-  @keyframes decorTimelineRunner { 0%,100% { translate: 0 0; opacity: .25; } 50% { translate: 0 min(52vh,520px); opacity: 1; } }
   @keyframes decorBracketSlide { 0%,100% { translate: 0 0; } 50% { translate: 48px -8px; letter-spacing: .4em; opacity: .7; } }
   @keyframes decorCardScanner { 0%,100% { left: 0; opacity: 0; } 18%,82% { opacity: .22; } 50% { left: calc(100% - 1px); opacity: .4; } }
 
@@ -2372,7 +2370,7 @@
   .easter-robot-svg { position: relative; left: 4px; z-index: 1; width: 50px; height: 64px; overflow: visible; }
   .robot-svg-head, .robot-svg-arm, .robot-svg-leg, .robot-svg-forearm, .robot-svg-shin, .robot-svg-shin path { transform-box: fill-box; will-change: transform; }
   .robot-svg-head { transform-origin: 50% 100%; animation: robotHeadGravity .64s ease-in-out infinite; }
-  .robot-svg-arm { transform-origin: 50% 12%; }
+  .robot-svg-arm { transform-origin: 50% 16%; }
   .robot-svg-leg { transform-origin: 50% 8%; }
   .robot-svg-forearm, .robot-svg-shin { transform-origin: 50% 8%; }
   .robot-svg-arm.left { animation: robotArmSwing .64s ease-in-out infinite; }
@@ -2447,6 +2445,21 @@
   @keyframes robotScan { from { transform: translateX(-2px) rotate(-2deg); } to { transform: translateX(2px) rotate(2deg); } }
   .easter-walker.poking .robot-svg-arm.right { animation: robotPoke .42s ease-in-out !important; }
   @keyframes robotPoke { 50% { transform: translate(10px,-7px) rotate(-68deg) scaleY(1.22); } }
+  .easter-walker.light-poking .robot-svg-arm.right { animation: robotLightPress .7s cubic-bezier(.33,.02,.2,1) both !important; }
+  .easter-walker.light-poking .robot-svg-forearm.right { animation: robotLightPressHand .7s cubic-bezier(.33,.02,.2,1) both !important; }
+  @keyframes robotLightPress {
+    0% { transform: rotate(18deg) scaleY(1); }
+    24% { transform: rotate(-8deg) scaleY(1.02); }
+    58% { transform: rotate(-52deg) scaleY(1.1); }
+    68%,76% { transform: rotate(-66deg) scaleY(1.16); }
+    100% { transform: rotate(18deg) scaleY(1); }
+  }
+  @keyframes robotLightPressHand {
+    0%,24% { transform: rotate(-8deg); }
+    58% { transform: rotate(-18deg); }
+    68%,76% { transform: rotate(-30deg); }
+    100% { transform: rotate(-8deg); }
+  }
   .easter-walker.waving .robot-svg-arm.right { animation: robotWaveArm 1.4s ease-in-out 1 !important; }
   .easter-walker.waving .robot-svg-forearm.right { animation: robotWaveHand .28s ease-in-out 5 !important; }
   @keyframes robotWaveArm { 0% { transform: translate(0,0) rotate(18deg); } 18%,88% { transform: translate(4px,-7px) rotate(-145deg); } 100% { transform: translate(0,0) rotate(18deg); } }
@@ -2456,6 +2469,12 @@
   .easter-walker.high-five .robot-svg-forearm.right { animation: robotHighFiveHand .52s ease-out 1 !important; }
   @keyframes robotHighFive { 0%,100% { transform: translate(4px,-7px) rotate(-145deg); } 45% { transform: translate(14px,-13px) rotate(-118deg) scaleY(1.2); } }
   @keyframes robotHighFiveHand { 0%,100% { transform: rotate(-12deg); } 45% { transform: rotate(38deg) scale(1.2); } }
+  .easter-walker.light-dance .robot-svg-arm.left { animation: robotDanceLeft .42s ease-in-out 4 !important; }
+  .easter-walker.light-dance .robot-svg-arm.right { animation: robotDanceRight .42s ease-in-out 4 !important; }
+  .easter-walker.light-dance .easter-walker-shell { animation: robotVictoryBounce .42s ease-in-out 4 !important; }
+  @keyframes robotDanceLeft { 0%,100% { transform: rotate(18deg); } 50% { transform: translate(-3px,-8px) rotate(128deg); } }
+  @keyframes robotDanceRight { 0%,100% { transform: rotate(-18deg); } 50% { transform: translate(5px,-9px) rotate(-132deg); } }
+  @keyframes robotVictoryBounce { 0%,100% { translate: 0 0; rotate: -2deg; } 50% { translate: 0 -7px; rotate: 4deg; } }
   .easter-walker-bubble { position: absolute; left: 48px; top: 55px; width: max-content; max-width: 190px; padding: 7px 10px; border: 1px solid var(--border); border-radius: 8px 8px 8px 2px; background: white; color: var(--navy); font-family: var(--mono); font-size: .62rem; box-shadow: var(--shadow-sm); opacity: 0; transform: translateY(5px) scale(.97); transition: opacity .28s ease, transform .32s cubic-bezier(.22,.7,.2,1); }
   .easter-walker.paused .easter-walker-bubble { opacity: 1; transform: translateY(0) scale(1); }
   .easter-button-tap { animation: easterButtonTap .55s ease !important; position: relative; z-index: 3001; }
@@ -3312,15 +3331,20 @@ function handleTimelineKey(event, item) {
 }
 
 function initEngTimeline() {
+  const timeline = document.querySelector('.eng-timeline');
   const items = document.querySelectorAll('.eng-timeline-item');
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) e.target.classList.add('visible');
+  if (!timeline) return;
+  if (!timeline.dataset.revealReady) {
+    timeline.dataset.revealReady = 'true';
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) e.target.classList.add('visible');
+      });
+    }, { threshold: 0.2 });
+    items.forEach((item, i) => {
+      setTimeout(() => observer.observe(item), i * 150);
     });
-  }, { threshold: 0.2 });
-  items.forEach((item, i) => {
-    setTimeout(() => observer.observe(item), i * 150);
-  });
+  }
 }
 
 // ── Scroll reveal ───────────────────────────────
@@ -3730,6 +3754,32 @@ function initEasterEggs() {
     let activeTravel = null;
     let rechargeInProgress = false;
     let highFiveUsed = false;
+    async function performLightShow() {
+      const lightSwitch = document.getElementById('workshopSwitch');
+      if (!lightSwitch) return;
+      const startedOn = document.body.classList.contains('workshop-mode');
+      walker.classList.add('paused');
+      bubble.textContent = 'What does this button do?';
+      await wait(520);
+      for (let press = 0; press < 2; press += 1) {
+        walker.classList.add('poking', 'light-poking');
+        await wait(455);
+        replayAnimation(lightSwitch, 'easter-button-tap');
+        lightSwitch.click();
+        bubble.textContent = press === 0 ? 'Click…' : 'And back again!';
+        burstAround(lightSwitch, press % 2 ? '#60a5fa' : '#fde047');
+        await wait(245);
+        walker.classList.remove('poking', 'light-poking');
+        await wait(115);
+      }
+
+      if (document.body.classList.contains('workshop-mode') !== startedOn) lightSwitch.click();
+      walker.classList.add('light-dance');
+      burstAround(walker, '#facc15');
+      await wait(1680);
+      walker.classList.remove('light-dance');
+      lightSwitch.classList.remove('easter-button-tap');
+    }
 
     walker.querySelector('.robot-svg-core')?.addEventListener('click', async event => {
       event.stopPropagation();
@@ -3876,7 +3926,10 @@ function initEasterEggs() {
       walker.classList.remove('paused');
     }
 
-    const farewellX = Math.max(8, window.innerWidth - 125);
+    const lightControlRect = document.getElementById('workshopSwitch')?.getBoundingClientRect();
+    const farewellX = lightControlRect?.width
+      ? Math.max(8, Math.min(window.innerWidth - 58, lightControlRect.left + (lightControlRect.width / 2) - 63))
+      : Math.max(8, window.innerWidth - 125);
     if (Math.abs(farewellX - currentX) > 1) {
       walker.classList.remove('tiptoeing', 'paused', 'poking', 'looking-back');
       walker.classList.add('scurrying', 'walking', 'accelerating');
@@ -3909,7 +3962,9 @@ function initEasterEggs() {
     }
 
     walker.classList.remove('scurrying', 'tiptoeing', 'walking', 'accelerating', 'full-speed', 'decelerating', 'poking', 'looking-back');
-    walker.classList.add('paused', 'waving');
+    walker.classList.add('paused');
+    await performLightShow();
+    walker.classList.add('waving');
     bubble.textContent = 'See you!';
     await wait(1450);
     walker.classList.remove('paused', 'waving');
