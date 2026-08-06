@@ -2250,6 +2250,98 @@
     filter: brightness(1.015) drop-shadow(0 7px 14px rgba(26,43,74,.14));
   }
   .btn:active, .project-view-button:active, .video-thumb-wrapper button:active { transform: translateY(1px) scale(.98); }
+
+  /* Site-wide ambient motion */
+  :is(.about-hero,.projects-hero,.skills-hero,.timeline-hero,.robotics-band) { position: relative; overflow: hidden; }
+  :is(.about-hero,.projects-hero,.skills-hero,.timeline-hero,.robotics-band) > .container { position: relative; z-index: 1; }
+  .about-hero::after { content: ''; position: absolute; bottom: 10%; left: 4%; width: 46px; height: 46px; border: 2px solid var(--blue); box-shadow: 12px 12px 0 color-mix(in srgb,var(--blue) 14%,transparent); opacity: .55; pointer-events: none; animation: decorBlueprintSquare 5s ease-in-out infinite; }
+  #page-projects .projects-hero::after { content: '</>'; position: absolute; right: 8%; bottom: 16%; color: var(--blue); font: 700 clamp(1.5rem,4vw,2.5rem)/1 var(--mono); letter-spacing: -.12em; opacity: .48; pointer-events: none; animation: decorCodeGlide 4.6s ease-in-out infinite; }
+  .skills-hero::after { content: ''; position: absolute; bottom: 18%; left: 6%; width: 6px; height: 38px; border-radius: 3px; background: var(--blue); box-shadow: 13px -12px 0 color-mix(in srgb,var(--blue) 72%,transparent), 26px 8px 0 color-mix(in srgb,var(--blue) 48%,transparent), 39px -5px 0 color-mix(in srgb,var(--blue) 28%,transparent); opacity: .65; transform-origin: bottom; pointer-events: none; animation: decorEqualizer 2.2s ease-in-out infinite; }
+  .timeline-hero::after { content: ''; position: absolute; top: 42%; left: 5%; width: 28px; height: 28px; border: 2px solid var(--blue); background: color-mix(in srgb,var(--blue) 8%,transparent); opacity: .58; pointer-events: none; animation: decorTimelineDiamond 4.4s ease-in-out infinite; }
+  .robotics-band::after { content: '+'; position: absolute; bottom: 7%; left: 3%; display: grid; place-items: center; width: 58px; height: 58px; border: 2px dashed var(--blue); color: var(--blue); font: 300 2.4rem/1 var(--display); opacity: .48; pointer-events: none; animation: decorMechanicalPlate 6s cubic-bezier(.4,0,.2,1) infinite; }
+  #page-contact .projects-hero::after { content: '@'; position: absolute; right: 8%; bottom: 12%; color: var(--blue); font: 500 clamp(2rem,5vw,3.4rem)/1 var(--mono); opacity: .42; pointer-events: none; animation: decorContactSignal 3.6s ease-in-out infinite; }
+
+  .skills-grid,.contact-grid,.eng-timeline,.education-grid,.project-showcase-card { position: relative; }
+  .skills-grid::after { content: '≈'; position: absolute; right: 12%; bottom: -42px; color: var(--blue); font: 700 2.1rem/1 var(--mono); opacity: .42; pointer-events: none; animation: decorWaveBounce 3s ease-in-out infinite; }
+  .contact-grid::before { content: '↗'; position: absolute; left: 45%; bottom: -48px; color: var(--blue); font: 400 2rem/1 var(--mono); opacity: .46; pointer-events: none; animation: decorPaperSignal 3.8s cubic-bezier(.4,0,.2,1) infinite; }
+  .eng-timeline::after { content: ''; position: absolute; top: 12px; left: 22px; z-index: 2; width: 10px; height: 24px; border-radius: 3px; background: var(--blue); box-shadow: 0 0 13px color-mix(in srgb,var(--blue) 65%,transparent); pointer-events: none; animation: decorTimelineRunner 7s ease-in-out infinite; }
+  .education-grid::after { content: '[ ]'; position: absolute; left: 8%; bottom: -44px; color: var(--blue); font: 700 1.25rem/1 var(--mono); letter-spacing: .18em; opacity: .38; pointer-events: none; animation: decorBracketSlide 4.8s ease-in-out infinite; }
+  .project-showcase-card::after { content: ''; position: absolute; top: 0; bottom: 0; left: 0; z-index: 3; width: 1px; background: linear-gradient(transparent,color-mix(in srgb,var(--blue) 55%,transparent),transparent); opacity: .28; pointer-events: none; animation: decorCardScanner 7.5s ease-in-out infinite; }
+
+  @keyframes decorBlueprintSquare { 0%,100% { translate: 0 0; rotate: 0deg; } 50% { translate: -14px 12px; rotate: 18deg; scale: 1.12; } }
+  @keyframes decorCodeGlide { 0%,100% { translate: 0 0; opacity: .35; } 50% { translate: -28px 8px; opacity: .8; text-shadow: 0 0 16px var(--blue); } }
+  @keyframes decorEqualizer { 0%,100% { scale: 1 .55; } 35% { scale: 1 1.15; } 70% { scale: 1 .78; } }
+  @keyframes decorTimelineDiamond { 0%,100% { translate: 0 -12px; rotate: 45deg; } 50% { translate: -34px 18px; rotate: 225deg; box-shadow: 0 0 18px color-mix(in srgb,var(--blue) 45%,transparent); } }
+  @keyframes decorMechanicalPlate { 0%,100% { rotate: 0deg; translate: 0 0; } 50% { rotate: 135deg; translate: -12px 10px; scale: 1.12; } }
+  @keyframes decorContactSignal { 0%,100% { translate: 0 0; scale: .9; } 50% { translate: -18px -8px; scale: 1.15; text-shadow: 0 0 18px var(--blue); } }
+  @keyframes decorWaveBounce { 0%,100% { translate: 0 0; rotate: -5deg; } 50% { translate: -34px -12px; rotate: 7deg; scale: 1.18; } }
+  @keyframes decorPaperSignal { 0%,100% { translate: -28px 8px; opacity: .22; } 50% { translate: 30px -20px; opacity: .8; text-shadow: 0 0 12px var(--blue); } }
+  @keyframes decorTimelineRunner { 0%,100% { translate: 0 0; opacity: .25; } 50% { translate: 0 min(52vh,520px); opacity: 1; } }
+  @keyframes decorBracketSlide { 0%,100% { translate: 0 0; } 50% { translate: 48px -8px; letter-spacing: .4em; opacity: .7; } }
+  @keyframes decorCardScanner { 0%,100% { left: 0; opacity: 0; } 18%,82% { opacity: .22; } 50% { left: calc(100% - 1px); opacity: .4; } }
+
+  .page.active .section-label { animation: motionLabelGlow 3.8s ease-in-out infinite; }
+  .page.active .divider { transform-origin: left center; animation: motionDivider 3.2s cubic-bezier(.4,0,.2,1) infinite; }
+  .page.active .section-title { animation: motionTitleDrift 4.2s ease-in-out infinite; }
+  .page.active :is(.home-focus-icon,.contact-icon,.rob-stat-icon,.video-play-icon) { animation: motionIconFloat 3.6s ease-in-out infinite; }
+  .page.active :is(.home-focus-item,.contact-card,.rob-stat-item):nth-child(2n) :is(.home-focus-icon,.contact-icon,.rob-stat-icon) { animation-delay: -.9s; }
+  .page.active :is(.home-focus-item,.contact-card,.rob-stat-item):nth-child(3n) :is(.home-focus-icon,.contact-icon,.rob-stat-icon) { animation-delay: -1.8s; }
+  .page.active .eng-timeline-item.visible .eng-tl-dot,
+  .page.active .timeline-item.active .timeline-dot { animation: motionTimelinePulse 2.6s ease-out infinite; }
+  .page.active :is(.about-photo-image,.robotics-hero-photo,.robotics-team-photo) img { animation: motionPhotoBreath 4.8s ease-in-out infinite; }
+  .page.active .robotics-team-photo:nth-child(2n) img { animation-delay: -3.5s; }
+  .page.active :is(.project-showcase-card,.education-card,.skill-card,.contact-card,.value-card,.case-step,.proof-card) { background-image: linear-gradient(115deg,transparent 34%,color-mix(in srgb,var(--blue) 4%,transparent) 50%,transparent 66%); background-size: 240% 100%; animation: motionSurfaceSweep 10s ease-in-out infinite, motionCardLift 5.5s ease-in-out infinite; }
+  .page.active :is(.project-showcase-card,.education-card,.skill-card,.contact-card,.value-card,.case-step,.proof-card):nth-child(2n) { animation-delay: -3s; }
+  .page.active :is(.project-showcase-card,.education-card,.skill-card,.contact-card,.value-card,.case-step,.proof-card):nth-child(3n) { animation-delay: -6s; }
+  nav .nav-links a.active::after { animation: motionNavAccent 2.4s ease-in-out infinite; }
+  .page.active :is(.btn-primary,.project-view-button,.home-secret-hint-mobile) { animation: motionActionPulse 2.8s ease-in-out infinite; }
+  .page.active .hero-name { animation: motionHeroFloat 5s ease-in-out infinite; }
+
+  @keyframes motionLabelGlow {
+    0%,100% { opacity: .72; letter-spacing: .12em; text-shadow: 0 0 0 transparent; }
+    50% { opacity: 1; letter-spacing: .14em; text-shadow: 0 0 12px color-mix(in srgb,var(--blue) 55%,transparent); }
+  }
+  @keyframes motionDivider {
+    0%,100% { width: 40px; opacity: .78; }
+    50% { width: 92px; opacity: 1; box-shadow: 0 0 12px color-mix(in srgb,var(--blue) 60%,transparent); }
+  }
+  @keyframes motionTitleDrift {
+    0%,100% { translate: 0 0; }
+    50% { translate: 2px -1px; text-shadow: -2px 4px 12px color-mix(in srgb,var(--blue) 11%,transparent); }
+  }
+  @keyframes motionIconFloat {
+    0%,100% { translate: 0 0; rotate: 0deg; }
+    50% { translate: 0 -5px; rotate: -2deg; scale: 1.035; }
+  }
+  @keyframes motionTimelinePulse {
+    0%,100% { box-shadow: 0 0 0 0 color-mix(in srgb,var(--blue) 28%,transparent); }
+    65% { box-shadow: 0 0 0 9px transparent; }
+  }
+  @keyframes motionPhotoBreath {
+    0%,100% { scale: 1; }
+    50% { scale: 1.045; filter: brightness(1.06) saturate(1.05); }
+  }
+  @keyframes motionSurfaceSweep {
+    0%,55%,100% { background-position: 115% 0; }
+    82% { background-position: -115% 0; }
+  }
+  @keyframes motionCardLift {
+    0%,100% { translate: 0 0; }
+    50% { translate: 0 -5px; }
+  }
+  @keyframes motionNavAccent {
+    0%,100% { opacity: .65; filter: drop-shadow(0 0 0 transparent); }
+    50% { opacity: 1; filter: drop-shadow(0 0 4px var(--blue)); }
+  }
+  @keyframes motionActionPulse {
+    0%,100% { box-shadow: 0 0 0 0 color-mix(in srgb,var(--blue) 28%,transparent); }
+    50% { box-shadow: 0 0 0 7px transparent, 0 9px 22px color-mix(in srgb,var(--blue) 24%,transparent); }
+  }
+  @keyframes motionHeroFloat {
+    0%,100% { translate: 0 0; }
+    50% { translate: 0 -3px; }
+  }
+
   .easter-toast { position: fixed; left: 50%; bottom: 28px; z-index: 3002; display: flex; align-items: center; gap: 10px; max-width: calc(100vw - 32px); padding: 12px 17px; border: 1px solid rgba(147,180,255,.42); border-radius: 11px; background: linear-gradient(135deg,rgba(26,43,74,.98),rgba(25,55,105,.98)); color: white; font-family: var(--mono); font-size: .72rem; letter-spacing: .045em; box-shadow: 0 16px 38px rgba(15,23,42,.3), inset 0 1px rgba(255,255,255,.08); opacity: 0; transform: translate(-50%, 14px) scale(.98); pointer-events: none; transition: opacity .25s ease, transform .25s ease; overflow: hidden; }
   .easter-toast::before { content: '✦'; display: grid; place-items: center; width: 24px; height: 24px; flex: 0 0 24px; border-radius: 50%; background: rgba(147,180,255,.16); color: #b9ceff; font-size: .8rem; }
   .easter-toast::after { content: ''; position: absolute; inset: 0; background: linear-gradient(105deg,transparent 30%,rgba(255,255,255,.12),transparent 70%); transform: translateX(-110%); }
@@ -2388,6 +2480,38 @@
     body:not(.workshop-mode), body:not(.workshop-mode) .page, body:not(.workshop-mode) :is(.home-hero-refined,.about-hero,.projects-hero,.skills-hero,.timeline-hero,.section,.section-sm,.robotics-band,.robotics-featured-video,.arm-simple,.arm-calm,.arm-calm-section,.arm-calm-gallery-section) { background-color: #fff; }
     body.workshop-mode, body.workshop-mode .page, body.workshop-mode :is(.home-hero-refined,.about-hero,.projects-hero,.skills-hero,.timeline-hero,.section,.section-sm,.robotics-band,.robotics-featured-video,.arm-simple,.arm-calm,.arm-calm-section,.arm-calm-gallery-section) { background-color: #111416 !important; }
     body.workshop-mode :is(.home-skills-strip,.robotics-stats-wrap,.robotics-stats,.case-callout,.video-note,footer) { background-color: #0d1012 !important; }
+    body:not(.workshop-mode) {
+      --mobile-page: #fff;
+      --mobile-surface: #fff;
+      --mobile-surface-soft: #f7f9fc;
+      --mobile-border: #e2e8f0;
+    }
+    body.workshop-mode {
+      --mobile-page: #111416;
+      --mobile-surface: #1a1f22;
+      --mobile-surface-soft: #15191c;
+      --mobile-border: #3a4146;
+    }
+    body:not(.workshop-mode) :is(.education-card,.skill-card,.project-card,.project-showcase-card,.contact-card,.metric-card,.proof-card,.interest-card,.value-card,.home-focus-item,.eng-tl-content,.eng-tl-dot,.timeline-content,.timeline-dot,.rob-card,.robotics-logo-back,.case-step,.clean-video-card,.clean-video-copy,.arm-carousel-viewport,.arm-carousel-caption,.lightbox-inner,.lightbox-close,.search-bar,.filter-btn,.asset-slot,.about-photo-image) {
+      background-color: var(--mobile-surface);
+      border-color: var(--mobile-border);
+    }
+    body.workshop-mode :is(.education-card,.skill-card,.project-card,.project-showcase-card,.contact-card,.metric-card,.proof-card,.interest-card,.value-card,.home-focus-item,.eng-tl-content,.eng-tl-dot,.timeline-content,.timeline-dot,.rob-card,.robotics-logo-back,.case-step,.clean-video-card,.clean-video-copy,.arm-carousel-viewport,.arm-carousel-caption,.lightbox-inner,.lightbox-close,.search-bar,.filter-btn,.asset-slot,.about-photo-image,.portrait-fallback,.asset-fallback) {
+      background-color: var(--mobile-surface) !important;
+      border-color: var(--mobile-border) !important;
+      color: var(--navy);
+    }
+    body.workshop-mode :is(.project-thumb-fallback,.arm-carousel-media,.arm-calm-gallery-section) { background-color: var(--mobile-surface-soft) !important; }
+    body.workshop-mode :is(.robotics-logo-back p,.arm-calm-status,.project-card-desc,.contact-desc,.case-step p,.clean-video-copy p) { color: var(--gray) !important; }
+    body.workshop-mode .workshop-switch svg { color: #ffc45b !important; }
+    body.workshop-mode .contact-icon.linkedin { background: #18232b; color: #70b7e8; }
+    body.workshop-mode .tag-green { background: #173224; color: #8de0aa; }
+    body.workshop-mode .tag-amber { background: #382b16; color: #f2c46d; }
+    body.workshop-mode .filter-btn.active { background: var(--blue) !important; border-color: var(--blue) !important; color: #16120d; }
+    body.workshop-mode .nav-links a { color: #aab2b9; }
+    body.workshop-mode .nav-links a.active { color: #f4f6f8; background: rgba(217,144,50,.12); }
+    body:not(.workshop-mode) .nav-links a { color: #64748b; }
+    body:not(.workshop-mode) .nav-links a.active { color: #1a2b4a; }
     .page { padding-top: 64px; }
     .section { padding-block: 52px; }
     .section-sm { padding-block: 38px; }
@@ -2540,7 +2664,6 @@
         <div class="portrait-frame" id="portraitFrame">
           <div class="portrait-slideshow" id="portraitSlideshow">
             <div class="portrait-slide"><img src="images/badger.png" alt="William holding a Wisconsin Badgers football"></div>
-            <div class="portrait-slide"><img src="images/2nd%20Top%20Angle.jpg" alt="Top-angle view of an early CAD project"></div>
             <div class="portrait-slide"><img src="images/car%20pic.jpg" alt="Car photo"></div>
             <div class="portrait-slide"><img src="images/food%20pic.jpg" alt="Food photo"></div>
             <div class="portrait-slide"><img src="images/solo%20pic%20restaurant.png" alt="Solo photo at a restaurant"></div>
@@ -2588,10 +2711,10 @@
         </div>
         <div class="about-photo reveal reveal-delay-1">
           <div class="about-photo-image">
-            <img src="images/GP.webp" alt="Portrait of a guinea pig" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+            <img src="images/2nd%20Top%20Angle.jpg" alt="William working on a CAD project at his laptop" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
             <div class="portrait-fallback" style="display:none;">
-              <strong>Portrait image</strong>
-              <span>images/GP.webp</span>
+              <strong>About Me image</strong>
+              <span>images/2nd Top Angle.jpg</span>
             </div>
           </div>
         </div>
