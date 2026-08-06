@@ -53,6 +53,10 @@
     img { transition: none; }
     img:hover { transform: none; }
   }
+  .home-secret-hint { margin: -22px clamp(18px,4vw,54px) 14px auto; width: max-content; max-width: calc(100% - 36px); color: var(--gray); font-family: var(--mono); font-size: .62rem; font-weight: 600; letter-spacing: .07em; opacity: .66; cursor: default; user-select: none; transition: opacity .3s ease, color .3s ease; }
+  .home-secret-hint:hover { color: var(--blue); opacity: .95; }
+  body.workshop-mode .home-secret-hint { color: #d99032; opacity: .72; }
+  body.workshop-mode .home-secret-hint:hover { color: #ffc45b; opacity: 1; }
 
   /* ── Blueprint SVG Grid Background ───────── */
   .blueprint-bg {
@@ -132,6 +136,7 @@
     align-items: center;
     gap: 4px;
     list-style: none;
+    margin-left: auto;
   }
   .nav-links a {
     font-family: var(--display);
@@ -182,6 +187,63 @@
   .hamburger[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
   .hamburger[aria-expanded="true"] span:nth-child(2) { opacity: 0; transform: scaleX(0); }
   .hamburger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  .workshop-switch { display: grid; place-items: center; width: 30px; height: 30px; margin-left: 9px; padding: 0; flex: 0 0 auto; border: 1px solid transparent; border-radius: 50%; background: transparent; color: #7b8797; cursor: pointer; transition: color .35s ease, background .35s ease, border-color .35s ease, box-shadow .35s ease, transform .25s ease; }
+  .workshop-switch:hover { color: var(--blue); background: var(--blue-pale); transform: translateY(-1px); }
+  .workshop-switch:focus-visible { outline: 3px solid rgba(37,99,235,.24); outline-offset: 2px; }
+  .workshop-switch svg { width: 18px; height: 18px; transition: filter .35s ease, transform .35s cubic-bezier(.22,.8,.2,1); }
+  .workshop-mode .workshop-switch { color: #ffc45b; border-color: rgba(240,173,78,.32); background: rgba(217,144,50,.13); box-shadow: 0 0 16px rgba(245,158,11,.2), inset 0 0 8px rgba(245,158,11,.08); }
+  .workshop-mode .workshop-switch svg { filter: drop-shadow(0 0 4px rgba(255,190,75,.72)); transform: scale(1.08); }
+
+  /* Hidden workshop lighting mode */
+  body, nav, .page, footer { transition: background-color .38s ease, border-color .38s ease, color .38s ease, box-shadow .38s ease; }
+  body.workshop-mode {
+    --navy: #e7edf3;
+    --blue: #d99032;
+    --blue-light: #f0ad4e;
+    --blue-pale: #2c2419;
+    --blue-wash: #211d18;
+    --gray: #aab2b9;
+    --gray-light: #191d20;
+    --border: #3a4146;
+    --white: #171b1e;
+    --shadow-sm: 0 2px 7px rgba(0,0,0,.3);
+    --shadow-md: 0 8px 22px rgba(0,0,0,.34);
+    --shadow-lg: 0 18px 48px rgba(0,0,0,.42);
+    background: #111416;
+    color: #e7edf3;
+  }
+  body.workshop-mode nav { background: rgba(17,20,22,.97); border-bottom-color: #42484d; box-shadow: 0 4px 22px rgba(0,0,0,.38); }
+  body.workshop-mode .page { background-color: #111416; }
+  body.workshop-mode .blueprint-bg::before { opacity: .42; filter: sepia(1) hue-rotate(345deg) saturate(1.5); }
+  body.workshop-mode :is(.education-card,.skill-card,.project-card,.project-showcase-card,.timeline-content,.contact-card,.proof-card,.metric-card,.search-bar,.filter-btn,.arm-carousel-viewport,.clean-video-card,.robotics-hero-photo,.robotics-team-photo,.robotics-logo-face,.about-photo-image,.asset-slot) { background: #1a1f22; border-color: #3a4146; box-shadow: 0 10px 28px rgba(0,0,0,.26); transition: background-color .38s ease, border-color .38s ease, color .38s ease, box-shadow .38s ease, transform .25s ease; }
+  body.workshop-mode :is(.home-skills-strip,.proj-hero,.robotics-stats-wrap,.robotics-stats,.case-callout,.video-note,.arm-video-placeholder,footer,.tag-navy) { background: #0d1012; }
+  body.workshop-mode .nav-logo .logo-mark { background: #d8dde1; border-color: #555d63; }
+  body.workshop-mode .nav-cta { color: #16120d !important; }
+  body.workshop-mode .easter-walker-bubble { background: #1a1f22; }
+  body.workshop-mode :is(
+    .filter-btn,.project-card,.metric-card,.process-dot,.timeline-dot,.timeline-content,
+    .skill-card,.about-photo-image,.interest-card,.eng-tl-dot,.eng-tl-content,
+    .robotics-hero-photo,.robotics-logo-front,.robotics-logo-back,.rob-card,
+    .robotics-team-photo,.contact-card,.lightbox-inner,.lightbox-close,.value-card,
+    .education-card,.home-focus-item,.project-showcase-card,.asset-slot,.case-step,
+    .proof-card,.arm-carousel-viewport,.arm-carousel-arrow,.clean-video-card
+  ) { background-color: #1a1f22; border-color: #3a4146; }
+  body.workshop-mode :is(.robotics-band,.robotics-featured-video,.arm-simple,.arm-calm,.arm-calm-gallery-section) { background: #111416; }
+  body.workshop-mode .arm-carousel-media { background: #141a1f; }
+  body.workshop-mode .arm-calm-meta span { background: rgba(37,30,21,.9); border-color: #554631; color: #c7b89f; }
+  body.workshop-mode .contact-icon.email { background: #22282c; box-shadow: inset 0 0 0 1px #424a50; }
+  body.workshop-mode .nav-links.open { background: #111416; }
+  body.workshop-mode .lightbox-img img { background: #171b1e !important; }
+  body.workshop-mode #page-robotics { background: #111416 !important; }
+  body.workshop-mode #page-robotics > .robotics-band { background: #111416 !important; }
+  body.workshop-mode #page-robotics > .section-sm { background: #191d20 !important; }
+  body.workshop-mode #page-robotics > .robotics-featured-video { background: #111416 !important; }
+  body.workshop-mode :is(.rob-stat-icon,.home-focus-icon,.contact-icon,.video-play-icon) { filter: drop-shadow(0 0 7px rgba(255,184,72,.42)); }
+  body.workshop-mode :is(.video-frame,.clean-video-card,.arm-carousel-viewport) { box-shadow: 0 0 0 1px rgba(240,173,78,.12), 0 16px 38px rgba(0,0,0,.4), 0 0 24px rgba(240,173,78,.07); }
+  body.workshop-mode .video-thumb-wrapper button:hover .video-play-icon { background: #d99032; }
+  body.workshop-mode .robot-svg-core { filter: drop-shadow(0 0 5px #f0ad4e); fill: #f0ad4e; }
+  body.workshop-mode .blueprint-bg::before { opacity: .58; }
+
 
   /* ── Pages (SPA) ──────────────────────────── */
   .page { display: none; min-height: 100vh; padding-top: 64px; }
@@ -2221,7 +2283,7 @@
   .easter-walker:not(.walking) .robot-svg-leg,
   .easter-walker:not(.walking) .robot-svg-shin,
   .easter-walker:not(.walking) .robot-svg-shin path { animation-play-state: paused !important; }
-  .robot-svg-core { animation: robotCore 1s ease-in-out infinite alternate; }
+  .robot-svg-core { animation: robotCore 1s ease-in-out infinite alternate; pointer-events: auto; cursor: pointer; }
   .robot-svg-eyes { transform-box: fill-box; transform: translateX(2px); transform-origin: 50% 50%; animation: robotBlink 4.6s ease-in-out infinite; filter: drop-shadow(0 0 2px rgba(110,231,255,.9)); }
   @keyframes robotBlink { 0%,46%,49%,100% { opacity: 1; clip-path: inset(0); } 47.5% { opacity: .78; clip-path: inset(38% 0); } }
   .robot-svg-brows, .robot-svg-mouth { transform-box: fill-box; transform-origin: center; transition: transform .22s ease; filter: drop-shadow(0 0 1px rgba(125,211,252,.8)); }
@@ -2236,6 +2298,11 @@
   .easter-walker.waving .robot-svg-mouth { transform: translateY(-1px) scale(1.18); }
   @keyframes robotSpeedEyes { 0%,100% { opacity: 1; transform: translateX(2px) scaleY(.62); } 50% { opacity: .82; transform: translateX(3px) scaleY(.48); } }
   @keyframes robotHappyEyes { from { transform: translateX(2px) scaleY(1); } to { transform: translateX(2px) scaleY(.68); } }
+  .easter-walker.recharging .robot-svg-core { animation: robotRechargeCore .34s ease-in-out infinite alternate !important; }
+  .easter-walker.recharging .robot-svg-eyes { animation: robotRechargeEyes .7s steps(2,end) infinite !important; }
+  .easter-walker.recharging .easter-walker-shell { filter: drop-shadow(0 0 8px rgba(96,165,250,.58)); }
+  @keyframes robotRechargeCore { from { transform: scale(.72); opacity: .55; } to { transform: scale(1.28); opacity: 1; filter: drop-shadow(0 0 7px #60a5fa); } }
+  @keyframes robotRechargeEyes { 0%,45% { opacity: .25; } 46%,100% { opacity: 1; } }
   @keyframes robotCore { from { opacity: .65; } to { opacity: 1; filter: drop-shadow(0 0 4px #60a5fa); } }
   @keyframes robotArmSwing { 0%,100% { transform: rotate(18deg); } 50% { transform: rotate(-20deg); } }
   @keyframes robotElbow { 0%,100% { transform: rotate(-8deg); } 45%,60% { transform: rotate(-30deg); } }
@@ -2279,6 +2346,11 @@
   .easter-walker.waving .robot-svg-forearm.right { animation: robotWaveHand .28s ease-in-out 5 !important; }
   @keyframes robotWaveArm { 0% { transform: translate(0,0) rotate(18deg); } 18%,88% { transform: translate(4px,-7px) rotate(-145deg); } 100% { transform: translate(0,0) rotate(18deg); } }
   @keyframes robotWaveHand { 0%,100% { transform: rotate(-22deg); } 50% { transform: rotate(24deg); } }
+  .easter-walker.waving { pointer-events: auto; cursor: pointer; }
+  .easter-walker.high-five .robot-svg-arm.right { animation: robotHighFive .52s cubic-bezier(.2,.8,.2,1) 1 !important; }
+  .easter-walker.high-five .robot-svg-forearm.right { animation: robotHighFiveHand .52s ease-out 1 !important; }
+  @keyframes robotHighFive { 0%,100% { transform: translate(4px,-7px) rotate(-145deg); } 45% { transform: translate(14px,-13px) rotate(-118deg) scaleY(1.2); } }
+  @keyframes robotHighFiveHand { 0%,100% { transform: rotate(-12deg); } 45% { transform: rotate(38deg) scale(1.2); } }
   .easter-walker-bubble { position: absolute; left: 48px; top: 55px; width: max-content; max-width: 190px; padding: 7px 10px; border: 1px solid var(--border); border-radius: 8px 8px 8px 2px; background: white; color: var(--navy); font-family: var(--mono); font-size: .62rem; box-shadow: var(--shadow-sm); opacity: 0; transform: translateY(5px) scale(.97); transition: opacity .28s ease, transform .32s cubic-bezier(.22,.7,.2,1); }
   .easter-walker.paused .easter-walker-bubble { opacity: 1; transform: translateY(0) scale(1); }
   .easter-button-tap { animation: easterButtonTap .55s ease !important; position: relative; z-index: 3001; }
@@ -2312,6 +2384,11 @@
       <li><a href="#" onclick="navigate('timeline');return false;" data-page="timeline">Timeline</a></li>
       <li><a href="#" onclick="navigate('contact');return false;" class="nav-cta" data-page="contact">Contact</a></li>
     </ul>
+    <button class="workshop-switch" id="workshopSwitch" type="button" aria-label="Turn on workshop mode" aria-pressed="false" title="Workshop light" onclick="toggleWorkshopMode()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M9 18h6M10 22h4M8.4 14.5A7 7 0 1 1 15.6 14.5c-.8.65-1.35 1.45-1.5 2.5h-4.2c-.15-1.05-.7-1.85-1.5-2.5Z"/>
+      </svg>
+    </button>
     <button class="hamburger" id="hamburger" type="button" aria-label="Toggle navigation menu" aria-controls="navLinks" aria-expanded="false" onclick="toggleMenu()">
       <span></span><span></span><span></span>
     </button>
@@ -2364,6 +2441,7 @@
     </div>
   </section>
 
+  <p class="home-secret-hint">psst—type “robot” for a surprise</p>
 </div>
 
 <!-- ═══════════════════════════════════════════
@@ -2843,6 +2921,18 @@ const SKILLS = {
 // ── State ──────────────────────────────────────
 let currentFilter = 'all';
 let currentProject = null;
+
+function setWorkshopMode(enabled) {
+  document.body.classList.toggle('workshop-mode', enabled);
+  const workshopSwitch = document.getElementById('workshopSwitch');
+  workshopSwitch?.setAttribute('aria-pressed', String(enabled));
+  workshopSwitch?.setAttribute('aria-label', enabled ? 'Turn off workshop mode' : 'Turn on workshop mode');
+  try { localStorage.setItem('workshop-mode', enabled ? 'on' : 'off'); } catch (_) {}
+}
+
+function toggleWorkshopMode() {
+  setWorkshopMode(!document.body.classList.contains('workshop-mode'));
+}
 
 // ── Navigation ─────────────────────────────────
 function navigate(pageId) {
@@ -3335,6 +3425,38 @@ function initEasterEggs() {
     document.body.appendChild(walker);
     const bubble = walker.querySelector('.easter-walker-bubble');
     const wait = duration => new Promise(resolve => window.setTimeout(resolve, duration));
+    let activeTravel = null;
+    let rechargeInProgress = false;
+    let highFiveUsed = false;
+
+    walker.querySelector('.robot-svg-core')?.addEventListener('click', async event => {
+      event.stopPropagation();
+      if (rechargeInProgress || walker.classList.contains('waving')) return;
+      rechargeInProgress = true;
+      const wasWalking = walker.classList.contains('walking');
+      const wasPaused = walker.classList.contains('paused');
+      activeTravel?.pause();
+      walker.classList.remove('walking', 'full-speed');
+      walker.classList.add('paused', 'recharging');
+      bubble.textContent = 'Recharging…';
+      burstAround(walker, document.body.classList.contains('workshop-mode') ? '#f0ad4e' : '#60a5fa');
+      await wait(1400);
+      walker.classList.remove('recharging');
+      if (!wasPaused) walker.classList.remove('paused');
+      if (wasWalking) walker.classList.add('walking');
+      activeTravel?.play();
+      rechargeInProgress = false;
+    });
+
+    walker.addEventListener('click', () => {
+      if (!walker.classList.contains('waving') || highFiveUsed) return;
+      highFiveUsed = true;
+      walker.classList.add('high-five');
+      bubble.textContent = 'High five!';
+      burstAround(walker, '#f59e0b');
+      window.setTimeout(() => walker.classList.remove('high-five'), 540);
+    });
+
     const targets = ['about', 'projects', 'robotics']
       .map(page => document.querySelector(`.nav-links a[data-page="${page}"]`))
       .filter(Boolean);
@@ -3381,6 +3503,7 @@ function initEasterEggs() {
         easing: 'cubic-bezier(.4,0,.2,1)',
         fill: 'forwards'
       });
+      activeTravel = walk;
       let logoWatchFrame;
       if (index === 0 && logoMark) {
         const logoRect = logoMark.getBoundingClientRect();
@@ -3423,6 +3546,7 @@ function initEasterEggs() {
         logoWatchFrame = window.requestAnimationFrame(watchLogoCrossing);
       }
       await walk.finished;
+      activeTravel = null;
       if (logoWatchFrame) window.cancelAnimationFrame(logoWatchFrame);
       window.clearTimeout(fullSpeedStart);
       window.clearTimeout(fullSpeedEnd);
@@ -3472,7 +3596,9 @@ function initEasterEggs() {
         ],
         { duration: farewellDuration, easing: 'cubic-bezier(.25,.7,.25,1)', fill: 'forwards' }
       );
+      activeTravel = farewellWalk;
       await farewellWalk.finished;
+      activeTravel = null;
       window.clearTimeout(farewellSpeedStart);
       window.clearTimeout(farewellSpeedEnd);
       currentX = farewellX;
@@ -3509,7 +3635,9 @@ function initEasterEggs() {
       ],
       { duration: exitDuration, easing: 'cubic-bezier(.2,.75,.25,1)', fill: 'forwards' }
     );
+    activeTravel = exitWalk;
     await exitWalk.finished;
+    activeTravel = null;
     window.clearTimeout(exitFullSpeedStart);
     window.clearTimeout(exitFullSpeedEnd);
     walker.classList.remove('walking', 'accelerating', 'full-speed', 'decelerating');
@@ -3533,6 +3661,7 @@ function initEasterEggs() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  try { setWorkshopMode(localStorage.getItem('workshop-mode') === 'on'); } catch (_) {}
   // Skills
   renderSkillsGrid('cadSkillsGrid', SKILLS.cad);
   renderSkillsGrid('engSkillsGrid', SKILLS.eng);
