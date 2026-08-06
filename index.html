@@ -2363,6 +2363,7 @@
   @keyframes easterButtonTap { 35% { transform: scale(.94); box-shadow: 0 0 0 7px rgba(37,99,235,.2); } 70% { transform: scale(1.03); } }
   @media (max-width: 600px) {
     html, body { width: 100%; max-width: 100%; overflow-x: hidden; }
+    nav, nav.scrolled { position: fixed !important; inset: 0 0 auto 0 !important; z-index: 3000 !important; height: 64px; transform: none !important; translate: none !important; opacity: 1 !important; visibility: visible !important; }
     .reveal { opacity: 1 !important; transform: none !important; }
     .container { width: 100%; padding-inline: 16px; }
     .nav-inner { display: flex; width: 100%; height: 64px; padding-inline: 8px; gap: 6px; overflow: hidden; }
@@ -2375,6 +2376,9 @@
     .nav-links li { flex: 0 0 auto; width: auto; }
     .nav-links a, .nav-links.open a { display: block; width: auto; padding: 8px 7px; border-radius: 7px; font-size: .68rem; line-height: 1; white-space: nowrap; text-align: center; }
     .nav-links .nav-cta { padding: 8px 9px !important; }
+    body:not(.workshop-mode), body:not(.workshop-mode) .page, body:not(.workshop-mode) :is(.home-hero-refined,.about-hero,.projects-hero,.skills-hero,.timeline-hero,.section,.section-sm,.robotics-band,.robotics-featured-video,.arm-simple,.arm-calm,.arm-calm-section,.arm-calm-gallery-section) { background-color: #fff; }
+    body.workshop-mode, body.workshop-mode .page, body.workshop-mode :is(.home-hero-refined,.about-hero,.projects-hero,.skills-hero,.timeline-hero,.section,.section-sm,.robotics-band,.robotics-featured-video,.arm-simple,.arm-calm,.arm-calm-section,.arm-calm-gallery-section) { background-color: #111416 !important; }
+    body.workshop-mode :is(.home-skills-strip,.robotics-stats-wrap,.robotics-stats,.case-callout,.video-note,footer) { background-color: #0d1012 !important; }
     .page { padding-top: 64px; }
     .section { padding-block: 52px; }
     .section-sm { padding-block: 38px; }
